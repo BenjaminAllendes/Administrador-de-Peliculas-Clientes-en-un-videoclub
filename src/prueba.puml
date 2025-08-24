@@ -1,0 +1,23 @@
+@startuml
+User --> Arriendo
+Arriendo --> Pelicula
+
+class Arriendo{
+id
+fecha_inicio
+fecha_termino
+}
+
+class Pelicula{
+id
+nombre
+director
+categoria
+}
+
+class User{
+id
+nombre
+pelicula
+}
+@enduml
