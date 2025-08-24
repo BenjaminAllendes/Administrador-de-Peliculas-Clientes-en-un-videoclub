@@ -16,6 +16,25 @@ public class Pelicula {
 
     //Metodos
 
+    public String getTitle(){
+        return title ;
+    }
+    public void setTitle(String title){
+        this.title = title ;
+    }
+    public String getGenre(){
+        return genre ;
+    }
+    public void setGenre(String genre){
+        this.genre = genre ;
+    }
+    public String getID(){
+        return id ;
+    }
+    public void setID(int id){
+        this.id = id ;
+    }
+
     public boolean estaDisponible(){
         return stock>0;
 
@@ -29,5 +48,6 @@ public class Pelicula {
     public void aumentarStock(){
         stock++;
     }
+
 
 }
