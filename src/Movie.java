@@ -1,4 +1,4 @@
-public class Pelicula {
+public class Movie {
 
     private String id;
     private String title;
@@ -6,7 +6,7 @@ public class Pelicula {
     private int stock;
 
 
-    public Pelicula(String id, String title, String genre, int stock){
+    public Movie(String id, String title, String genre, int stock){
 
         this.id = id;
         this.title = title;

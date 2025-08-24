@@ -2,11 +2,11 @@ import java.time.LocalDate;
 
 public class Rent {
     private Client rentClient;
-    private Pelicula movie;
+    private Movie movie;
     private LocalDate rentDate;
     private LocalDate returnDate;
 
-    public Rent(Client rentClient, Pelicula movie, LocalDate rentDate, LocalDate returnDate) {
+    public Rent(Client rentClient, Movie movie, LocalDate rentDate, LocalDate returnDate) {
         this.rentClient = rentClient;
         this.movie = movie;
         this.rentDate = rentDate;
@@ -30,7 +30,7 @@ public class Rent {
         this.movie = movie;
     }
 
-    public Pelicula getMovie() {
+    public Movie getMovie() {
         return movie;
     }
 
