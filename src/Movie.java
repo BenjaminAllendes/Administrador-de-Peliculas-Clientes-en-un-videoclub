@@ -1,12 +1,12 @@
 public class Movie {
 
-    private String id;
+    private int id;
     private String title;
     private String genre;
     private int stock;
 
 
-    public Movie(String id, String title, String genre, int stock){
+    public Movie(int id, String title, String genre, int stock){
 
         this.id = id;
         this.title = title;
@@ -28,10 +28,10 @@ public class Movie {
     public void setGenre(String genre){
         this.genre = genre ;
     }
-    public String getID(){
+    public int getID(){
         return id ;
     }
-    public void setID(String id){
+    public void setID(int id){
         this.id = id ;
     }
 
