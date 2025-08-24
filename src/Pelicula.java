@@ -31,7 +31,7 @@ public class Pelicula {
     public String getID(){
         return id ;
     }
-    public void setID(int id){
+    public void setID(String id){
         this.id = id ;
     }
 
