@@ -24,11 +24,11 @@ public class Videoclub {
         movies.put(m.getID(), m);
     }
 
-    public Movie findMovieByID(String id) {
+    public Movie findMovieByID(int id) {
         return movies.get(id);
     }
 
-    public boolean rentMovie(int clientID, String movieID, int days) {
+    public boolean rentMovie(int clientID, int movieID, int days) {
         Client c = findClientByID(clientID);
         Movie m = findMovieByID(movieID);
 
@@ -43,7 +43,7 @@ public class Videoclub {
         return false;
     }
 
-    public boolean returnMovie(int clientID, String movieID) {
+    public boolean returnMovie(int clientID, int movieID) {
         Client c = findClientByID(clientID);
         Movie m = findMovieByID(movieID);
 

@@ -35,6 +35,14 @@ public class Movie {
         this.id = id ;
     }
 
+    public int getStock(){
+        return stock ;
+    }
+
+    public void setStock(){
+        this.stock = stock ;
+    }
+
     public boolean estaDisponible(){
         return stock>0;
 
@@ -42,7 +50,6 @@ public class Movie {
 
     public void reducirStock(){
         if (stock >0) stock--;
-
     }
 
     public void aumentarStock(){

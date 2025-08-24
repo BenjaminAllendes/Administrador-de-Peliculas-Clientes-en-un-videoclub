@@ -56,6 +56,7 @@ public class Client {
         recommended = new ArrayList<>();
     }
 
+    // editar el get recommended para que RECOMIENDE DEL MISMO GENERO
     public ArrayList<String>getRecommended(){
         return recommended ;
     }
