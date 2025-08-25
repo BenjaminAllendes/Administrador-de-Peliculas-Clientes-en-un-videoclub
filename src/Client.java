@@ -1,19 +1,18 @@
 import java.util.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Client {
     private int ID ;
     private String name ;
     private ArrayList<String> rent_list ;
-    private LinkedList<String> past_list ;
+    private ArrayList<String> past_list ;
     private ArrayList<String> recommended ;
 
     public Client(int ID, String name){
         this.ID = ID ;
         this.name = name ;
         rent_list = new ArrayList<>();
-        past_list = new LinkedList<>();
+        past_list = new ArrayList<>();
         recommended = new ArrayList<>();
     }
 
@@ -46,10 +45,10 @@ public class Client {
     }
 
     public void setPast_list(){
-        past_list = new LinkedList<>();
+        past_list = new ArrayList<>();
     }
 
-    public LinkedList<String>getPast_list(){
+    public ArrayList<String>getPast_list(){
         return past_list ;
     }
 
@@ -57,9 +56,9 @@ public class Client {
         recommended = new ArrayList<>();
     }
 
+    // editar el get recommended para que RECOMIENDE DEL MISMO GENERO
     public ArrayList<String>getRecommended(){
         return recommended ;
     }
-
 
 }

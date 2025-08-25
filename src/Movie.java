@@ -1,4 +1,4 @@
-public class Pelicula {
+public class Movie {
 
     private int id;
     private String title;
@@ -6,7 +6,7 @@ public class Pelicula {
     private int stock;
 
 
-    public Pelicula(int id, String title, String genre, int stock){
+    public Movie(int id, String title, String genre, int stock){
 
         this.id = id;
         this.title = title;
@@ -35,6 +35,14 @@ public class Pelicula {
         this.id = id ;
     }
 
+    public int getStock(){
+        return stock ;
+    }
+
+    public void setStock(int stock){
+        this.stock = stock ;
+    }
+
     public boolean estaDisponible(){
         return stock>0;
 
@@ -42,7 +50,6 @@ public class Pelicula {
 
     public void reducirStock(){
         if (stock >0) stock--;
-
     }
 
     public void aumentarStock(){
