@@ -67,7 +67,7 @@ public class Videoclub {
             System.out.println("ID: " + m.getID() +
                     " | Título: " + m.getTitle() +
                     " | Género: " + m.getGenre() +
-                    " | Stock: " + (m.estaDisponible() ? m.getID() : "Agotado"));
+                    " | Stock: " + (m.estaDisponible() ? m.getStock() : "Agotado"));
         }
     }
 

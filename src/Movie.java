@@ -39,7 +39,7 @@ public class Movie {
         return stock ;
     }
 
-    public void setStock(){
+    public void setStock(int stock){
         this.stock = stock ;
     }
 
