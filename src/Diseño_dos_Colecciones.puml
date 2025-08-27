@@ -1,6 +1,0 @@
-@startumlmap CapitalCity {
- UK *-> London
- USA => Washington
- Germany => Berlin
-}
-@enduml

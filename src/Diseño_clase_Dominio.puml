@@ -1,14 +1,5 @@
 @startuml
 
-Rent <-- Movie
-Client --> Rent
-Videoclub <-- Rent
-Videoclub <-- Client
-Videoclub <-- Movie
-
-
-
-
 class Rent{
 rentClient : Client
 movie : Movie
