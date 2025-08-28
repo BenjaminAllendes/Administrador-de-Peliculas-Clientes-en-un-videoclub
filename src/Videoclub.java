@@ -50,7 +50,7 @@ public class Videoclub {
         if (c != null && m != null) {
             c.getPast_list().add(m.getTitle());
             c.getRent_list().removeIf(s -> s.contains(m.getTitle()));
-            m.aumentarStock();
+            m.increaseStock();
             return true;
         }
         return false;
