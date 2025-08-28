@@ -18,7 +18,7 @@ public class Rent {
         movie.reducirStock();
     }
 
-    public void setRentClient(){
+    public void setRentClient(Client rentClient){
         this.rentClient = rentClient;
     }
 
@@ -26,7 +26,7 @@ public class Rent {
         return rentClient;
     }
 
-    public void setMovie(){
+    public void setMovie(Movie movie){
         this.movie = movie;
     }
 
@@ -34,7 +34,7 @@ public class Rent {
         return movie;
     }
 
-    public void setRentDate(){
+    public void setRentDate(LocalDate rentDate){
         this.rentDate = rentDate;
     }
 
@@ -42,7 +42,7 @@ public class Rent {
         return rentDate;
     }
 
-    public void setReturnDate(){
+    public void setReturnDate(LocalDate returnDate){
         this.returnDate = returnDate;
     }
 

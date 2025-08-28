@@ -55,6 +55,10 @@ public class Movie {
     public void aumentarStock(){
         stock++;
     }
-
+    public void aumentarStock(int cantidad) {
+        if (cantidad > 0) {
+            this.stock += cantidad;
+        }
+    }
 
 }
