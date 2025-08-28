@@ -1,0 +1,31 @@
+@startuml
+
+class Rent{
+rentClient : Client
+movie : Movie
+rentDate : LocalDate
+returnDate : LocalDate
+
+}
+
+class Videoclub{
+clients : Map<Integer, Client>
+movies : Map<Integer, Movie>
+rents : ArrayList<Rent>
+}
+
+class Movie{
+ID : int
+title : String
+genre : String
+stock : int
+}
+
+class Client{
+ID : Int
+name : String
+rent_list : ArrayList<String>
+past_list : ArrayList<String>
+recommended : ArrayList<String>
+}
+@enduml
