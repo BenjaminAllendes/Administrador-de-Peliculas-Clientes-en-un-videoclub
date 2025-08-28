@@ -27,8 +27,13 @@ public class Client {
     }
 
     public void setName(String name){
-        if (name.equals(name.toString())) {
+        if (!name.isEmpty()) {
             this.name = name ;
+        }
+    }
+    public void setName(String firstName, String lastName) {
+        if (!firstName.isEmpty() && !lastName.isEmpty()) {
+            this.name = firstName + " " + lastName;
         }
     }
 
