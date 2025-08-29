@@ -15,7 +15,7 @@ public class Rent {
         rentClient.getRent_list().add(movie.getTitle()
                 + " (Arriendo: " + rentDate
                 + " / Devolución: " + returnDate + ")");
-        movie.reducirStock();
+        movie.decreaseStock();
     }
 
     public void setRentClient(Client rentClient){

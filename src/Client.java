@@ -16,7 +16,7 @@ public class Client {
         recommended = new ArrayList<>();
     }
 
-    public void setID(){
+    public void setID(int ID){
         if (ID >= 0) {
             this.ID = ID ;
         }
@@ -33,7 +33,7 @@ public class Client {
     }
     public void setName(String firstName, String lastName) {
         if (!firstName.isEmpty() && !lastName.isEmpty()) {
-            this.name = firstName + " " + lastName;
+            this.name = firstName + " " + lastName ;
         }
     }
 

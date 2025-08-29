@@ -48,14 +48,14 @@ public class Movie {
 
     }
 
-    public void reducirStock(){
+    public void decreaseStock(){
         if (stock >0) stock--;
     }
 
-    public void aumentarStock(){
+    public void increaseStock(){
         stock++;
     }
-    public void aumentarStock(int cantidad) {
+    public void increaseStock(int cantidad) {
         if (cantidad > 0) {
             this.stock += cantidad;
         }
