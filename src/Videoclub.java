@@ -2,16 +2,21 @@ import java.util.*;
 import java.time.LocalDate;
 
 public class Videoclub {
+    //Mapa que guarda a los clientes, donde la clave es el ID único del cliente
     private Map<Integer, Client> clients;
+    //Mapa que guarda las películas, donde la clave es el ID único de la película
     private Map<Integer, Movie> movies;
+    //Lista que almacena todos los arriendos activos
     private ArrayList<Rent> rents;
 
+    //Constructor: inicializa los mapas y la lista de arriendos vacíos
     public Videoclub() {
         clients = new HashMap<>();
         movies = new HashMap<>();
         rents = new ArrayList<>();
     }
 
+    // ----- Métodos SETTERS y GETTERS  -----
     public void addClient(Client c) {
         clients.put(c.getID(), c);
     }
@@ -27,7 +32,7 @@ public class Videoclub {
     public Movie findMovieByID(int id) {
         return movies.get(id);
     }
-
+    //Método para arrendar una película
     public boolean rentMovie(int clientID, int movieID, int days) {
         Client c = findClientByID(clientID);
         Movie m = findMovieByID(movieID);
@@ -42,7 +47,7 @@ public class Videoclub {
         }
         return false;
     }
-
+    //Método para devolver una película
     public boolean returnMovie(int clientID, int movieID) {
         Client c = findClientByID(clientID);
         Movie m = findMovieByID(movieID);
@@ -55,13 +60,13 @@ public class Videoclub {
         }
         return false;
     }
-
+    //Muestra todos los clientes registrados
     public void showClients() {
         for (Client c : clients.values()) {
             System.out.println("ID: " + c.getID() + " | Nombre: " + c.getName());
         }
     }
-
+    //Muestra todas las películas registradas
     public void showMovies() {
         for (Movie m : movies.values()) {
             System.out.println("ID: " + m.getID() +
@@ -70,7 +75,7 @@ public class Videoclub {
                     " | Stock: " + (m.estaDisponible() ? m.getStock() : "Agotado"));
         }
     }
-
+    //Muestra todos los arriendos actuales con su información
     public void showRents() {
         for (Rent r : rents) {
             r.showInfo();

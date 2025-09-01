@@ -6,21 +6,26 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Videoclub vc = new Videoclub();
+        Videoclub vc = new Videoclub(); //Crea una instancia del videoclub que manejará todo el sistema
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        // MINI BASE DE DATOS DE PELÍCULAS - PRE CSV
-        vc.addMovie(new Movie(001, "Matrix", "Acción", 1));
-        vc.addMovie(new Movie(002, "Titanic", "Romance", 1));
-        vc.addMovie(new Movie(003, "El señor de los anillos", "Fantasía", 1));
-        vc.addMovie(new Movie(004, "Toy Story", "Animación", 1));
-        vc.addMovie(new Movie(005, "Los Increibles", "Animación", 1));
+        // ==============================
+        // BASE DE DATOS PRE-CARGADA
+        // ==============================
+        vc.addMovie(new Movie(001, "Matrix", "Acción", 10));
+        vc.addMovie(new Movie(002, "Titanic", "Romance", 15));
+        vc.addMovie(new Movie(003, "El señor de los anillos", "Fantasía", 11));
+        vc.addMovie(new Movie(004, "Toy Story", "Animación", 10));
+        vc.addMovie(new Movie(005, "Los Increibles", "Animación", 17));
 
 
         System.out.println("5 películas precargadas en el sistema.");
 
-        boolean running = true;
+        boolean running = true; //Variable para controlar el menú principal
 
+        // ==============================
+        // BUCLE DEL MENÚ PRINCIPAL
+        // ==============================
         while (running) {
             System.out.println("\n===== MENÚ VIDEOCLUB =====");
             System.out.println("1. Registrarse");
@@ -33,10 +38,10 @@ public class Main {
             System.out.println("0. Salir");
             System.out.print("Elige una opción: ");
 
-            int option = Integer.parseInt(br.readLine()) ;
+            int option = Integer.parseInt(br.readLine()) ; //Lee la opción del usuario
 
-            switch (option) {
-                case 1 :
+            switch (option) { //Switch para manejar cada opción del menú
+                case 1 : //REGISTRO DE NUEVO CLIENTE
                     int id = (int)(Math.random()*9000) + 1000 ;
 
                     System.out.println("ID asignado automáticamente: " + id);
@@ -47,7 +52,7 @@ public class Main {
                     System.out.println("Cliente añadido correctamente con ID " + id);
                     break ;
 
-                case 2 :
+                case 2 : //REALIZAR ARRIENDO
                     System.out.println("Ingrese su ID de Cliente: ");
                     int clientID = Integer.parseInt(br.readLine()) ;
                     Client c1 = vc.findClientByID(clientID);
@@ -68,7 +73,7 @@ public class Main {
                     }
                     break ;
 
-                case 3 :
+                case 3 : //VER RECOMENDACIONES
                     System.out.println("Ingrese su ID de Cliente: ");
                     int recClientID = Integer.parseInt(br.readLine()) ;
 
@@ -87,7 +92,7 @@ public class Main {
                     }
                     break ;
 
-                case 4 :
+                case 4 : //DEVOLVER PELÍCULA
                     System.out.println("Ingrese su ID de Cliente: ");
                     int clientReturnID = Integer.parseInt(br.readLine()) ;
 
@@ -107,27 +112,27 @@ public class Main {
                     }
                     break;
 
-                case 5 :
+                case 5 : //MOSTRAR LISTA DE ARRIENDOS ACTIVOS
                     System.out.println("===== LISTA ARRIENDOS =====");
                     vc.showRents();
                     break ;
 
-                case 6 :
+                case 6 : //MOSTRAR CLIENTES
                     System.out.println("===== CLIENTES =====");
                     vc.showClients();
                     break;
 
-                case 7 :
+                case 7 : //MOSTRAR PELÍCULAS
                     System.out.println("===== PELICULAS =====");
                     vc.showMovies();
                     break ;
 
-                case 0 :
+                case 0 : //SALIR DEL PROGRAMA
                     running = false ;
                     System.out.println("Saliendo del Videoclub...");
                     break ;
 
-                default:
+                default: //OPCIÓN INVÁLIDA
                     System.out.println("OPCIÓN INVÁLIDA.");
                     break;
 
