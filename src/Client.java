@@ -1,71 +1,74 @@
-import java.util.*;
 import java.util.ArrayList;
 
 public class Client {
-    private int ID ;
-    private String name ;
-    private ArrayList<String> rent_list ;
-    private ArrayList<String> past_list ;
-    private ArrayList<String> recommended ;
+    private int id;
+    private String name;
+    private ArrayList<Rent> rentList;       // Arriendos activos
+    private ArrayList<Rent> pastList;       // Arriendos pasados
+    private ArrayList<Movie> recommended;   // Películas recomendadas
 
-    //Constructor: Inicializa el cliente con ID y un nombre
-    public Client(int ID, String name){
-        this.ID = ID ;
-        this.name = name ;
-        rent_list = new ArrayList<>();
-        past_list = new ArrayList<>();
-        recommended = new ArrayList<>();
+    // Constructor
+    public Client(int id, String name) {
+        this.id = id;
+        this.name = name;
+        this.rentList = new ArrayList<>();
+        this.pastList = new ArrayList<>();
+        this.recommended = new ArrayList<>();
     }
-    //Setter para poblar el ID
-    public void setID(int ID){
-        if (ID >= 0) {
-            this.ID = ID ;
+
+    // ----- ID -----
+    public void setId(int id){
+        if (id >= 0) {
+            this.id = id;
         }
     }
-    //Getter para obtener el ID
-    public int getID(){
-        return ID ;
+
+    public int getId(){
+        return id;
     }
-    // Setter para el nombre, validando que no esté vacío
+
+    // ----- NAME -----
     public void setName(String name){
-        if (!name.isEmpty()) {
-            this.name = name ;
+        if (name != null && !name.isEmpty()) {
+            this.name = name;
         }
     }
-    //Sobrecarga del método setName: permite establecer nombre y apellido juntos
-    public void setName(String firstName, String lastName) {
-        if (!firstName.isEmpty() && !lastName.isEmpty()) {
-            this.name = firstName + " " + lastName ;
+
+    public void setName(String firstName, String lastName){
+        if (firstName != null && lastName != null &&
+                !firstName.isEmpty() && !lastName.isEmpty()) {
+            this.name = firstName + " " + lastName;
         }
     }
-    // ----- Métodos SETTERS y GETTERS  -----
+
     public String getName(){
-        return name ;
+        return name;
     }
 
-    public void setRent_list(){
-        rent_list = new ArrayList<>();
+    // ----- RENT LIST -----
+    public ArrayList<Rent> getRentList(){
+        return rentList;
     }
 
-    public ArrayList<String>getRent_list(){
-        return rent_list ;
+    public void addRent(Rent rent){
+        rentList.add(rent);
     }
 
-    public void setPast_list(){
-        past_list = new ArrayList<>();
+    // ----- PAST LIST -----
+    public ArrayList<Rent> getPastList(){
+        return pastList;
     }
 
-    public ArrayList<String>getPast_list(){
-        return past_list ;
+    public void addPastRent(Rent rent){
+        pastList.add(rent);
     }
 
-    public void setRecommended(){
-        recommended = new ArrayList<>();
+    // ----- RECOMMENDED -----
+    public ArrayList<Movie> getRecommended(){
+        return recommended;
     }
 
-
-    public ArrayList<String>getRecommended(){
-        return recommended ;
+    public void addRecommended(Movie movie){
+        recommended.add(movie);
     }
-
 }

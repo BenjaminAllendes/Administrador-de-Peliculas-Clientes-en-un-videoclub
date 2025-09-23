@@ -1,57 +1,59 @@
-import java.time.LocalDate; //Importa LocalDate para manejar fechas de arriendo y devolución
+import java.time.LocalDate;
 
 public class Rent {
-    private Client rentClient; //Cliente que realiza el arriendo
-    private Movie movie; //Película que está siendo arrendada
-    private LocalDate rentDate; //Fecha en que se realiza el arriendo
-    private LocalDate returnDate; //Fecha programada para devolver la película
+    private Client rentClient;      // Cliente que realiza el arriendo
+    private Movie movie;            // Película que se está arrendando
+    private LocalDate rentDate;     // Fecha de arriendo
+    private LocalDate returnDate;   // Fecha de devolución
 
-    //Constructor: crea un nuevo arriendo
+    // Constructor
     public Rent(Client rentClient, Movie movie, LocalDate rentDate, LocalDate returnDate) {
         this.rentClient = rentClient;
         this.movie = movie;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
 
-        rentClient.getRent_list().add(movie.getTitle()
-                + " (Arriendo: " + rentDate
-                + " / Devolución: " + returnDate + ")");
+        // Agrega este arriendo al cliente como objeto Rent
+        rentClient.addRent(this);
+
+        // Disminuye el stock de la película
         movie.decreaseStock();
     }
-    // ----- Métodos SETTERS y GETTERS  -----
-    public void setRentClient(Client rentClient){
-        this.rentClient = rentClient;
-    }
 
+    // ----- GETTERS y SETTERS -----
     public Client getRentClient() {
         return rentClient;
     }
 
-    public void setMovie(Movie movie){
-        this.movie = movie;
+    public void setRentClient(Client rentClient) {
+        this.rentClient = rentClient;
     }
 
     public Movie getMovie() {
         return movie;
     }
 
-    public void setRentDate(LocalDate rentDate){
-        this.rentDate = rentDate;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public LocalDate getRentDate() {
         return rentDate;
     }
 
-    public void setReturnDate(LocalDate returnDate){
-        this.returnDate = returnDate;
+    public void setRentDate(LocalDate rentDate) {
+        this.rentDate = rentDate;
     }
 
     public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    //Muestra información detallada del arriendo
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    // Muestra información del arriendo
     public void showInfo() {
         System.out.println("Cliente: " + rentClient.getName() +
                 " | Película: " + movie.getTitle() +

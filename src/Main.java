@@ -1,27 +1,23 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.SQLOutput;
+import java.io.*;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Videoclub vc = new Videoclub(); //Crea una instancia del videoclub que manejará todo el sistema
+        Videoclub vc = new Videoclub(); // Instancia del videoclub
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         // ==============================
         // BASE DE DATOS PRE-CARGADA
         // ==============================
-        vc.addMovie(new Movie(001, "Matrix", "Acción", 10));
-        vc.addMovie(new Movie(002, "Titanic", "Romance", 15));
-        vc.addMovie(new Movie(003, "El señor de los anillos", "Fantasía", 11));
-        vc.addMovie(new Movie(004, "Toy Story", "Animación", 10));
-        vc.addMovie(new Movie(005, "Los Increibles", "Animación", 17));
-
+        vc.addMovie(new Movie(1, "Matrix", "Acción", 10));
+        vc.addMovie(new Movie(2, "Titanic", "Romance", 15));
+        vc.addMovie(new Movie(3, "El señor de los anillos", "Fantasía", 11));
+        vc.addMovie(new Movie(4, "Toy Story", "Animación", 10));
+        vc.addMovie(new Movie(5, "Los Increibles", "Animación", 17));
 
         System.out.println("5 películas precargadas en el sistema.");
 
-        boolean running = true; //Variable para controlar el menú principal
+        boolean running = true;
 
         // ==============================
         // BUCLE DEL MENÚ PRINCIPAL
@@ -38,104 +34,100 @@ public class Main {
             System.out.println("0. Salir");
             System.out.print("Elige una opción: ");
 
-            int option = Integer.parseInt(br.readLine()) ; //Lee la opción del usuario
+            int option = Integer.parseInt(br.readLine());
 
-            switch (option) { //Switch para manejar cada opción del menú
-                case 1 : //REGISTRO DE NUEVO CLIENTE
-                    int id = (int)(Math.random()*9000) + 1000 ;
-
+            switch (option) {
+                case 1: // REGISTRO DE CLIENTE
+                    int id = (int)(Math.random()*9000) + 1000;
                     System.out.println("ID asignado automáticamente: " + id);
                     System.out.println("Ingrese su nombre: ");
                     String name = br.readLine();
-
                     vc.addClient(new Client(id, name));
                     System.out.println("Cliente añadido correctamente con ID " + id);
-                    break ;
+                    break;
 
-                case 2 : //REALIZAR ARRIENDO
+                case 2: // REALIZAR ARRIENDO
                     System.out.println("Ingrese su ID de Cliente: ");
-                    int clientID = Integer.parseInt(br.readLine()) ;
+                    int clientID = Integer.parseInt(br.readLine());
                     Client c1 = vc.findClientByID(clientID);
-                    if (c1 ==  null) {
+                    if (c1 == null) {
                         System.out.println("NO EXISTE INFORMACIÓN DE ESTE USUARIO.");
-                        break ;
+                        break;
                     }
 
                     System.out.println("Ingrese ID de la película: ");
-                    int movieID = Integer.parseInt(br.readLine()) ;
+                    int movieID = Integer.parseInt(br.readLine());
                     System.out.println("Ingrese días de arriendo: ");
-                    int days = Integer.parseInt(br.readLine()) ;
+                    int days = Integer.parseInt(br.readLine());
 
                     if (vc.rentMovie(clientID, movieID, days)) {
                         System.out.println("Arriendo realizado con éxito.");
                     } else {
                         System.out.println("NO se pudo realizar el arriendo.");
                     }
-                    break ;
+                    break;
 
-                case 3 : //VER RECOMENDACIONES
+                case 3: // VER RECOMENDACIONES
                     System.out.println("Ingrese su ID de Cliente: ");
-                    int recClientID = Integer.parseInt(br.readLine()) ;
-
-                    Client c3 = vc.findClientByID(recClientID) ;
+                    int recClientID = Integer.parseInt(br.readLine());
+                    Client c3 = vc.findClientByID(recClientID);
                     if (c3 == null){
                         System.out.println("NO EXISTE INFORMACIÓN DE ESTE USUARIO.");
+                        break;
                     }
 
                     System.out.println("===== RECOMENDACIONES PARA " + c3.getName() + " =====");
                     if (c3.getRecommended().isEmpty()) {
                         System.out.println("No hay recomendaciones disponibles.");
                     } else {
-                        for (String rec : c3.getRecommended()) {
-                            System.out.println("- " + rec);
+                        for (Movie rec : c3.getRecommended()) {
+                            System.out.println("- " + rec.getTitle() + " (" + rec.getGenre() + ")");
                         }
                     }
-                    break ;
+                    break;
 
-                case 4 : //DEVOLVER PELÍCULA
+                case 4: // DEVOLVER PELÍCULA
                     System.out.println("Ingrese su ID de Cliente: ");
-                    int clientReturnID = Integer.parseInt(br.readLine()) ;
-
+                    int clientReturnID = Integer.parseInt(br.readLine());
                     Client c2 = vc.findClientByID(clientReturnID);
                     if (c2 == null) {
                         System.out.println("NO EXISTE INFORMACIÓN DE ESTE USUARIO.");
-                        break ;
+                        break;
                     }
 
                     System.out.println("Ingrese ID de la película: ");
-                    int movieReturnID = Integer.parseInt(br.readLine()) ;
+                    int movieReturnID = Integer.parseInt(br.readLine());
 
                     if (vc.returnMovie(clientReturnID, movieReturnID)) {
                         System.out.println("Arriendo finalizado.");
                     } else {
-                        System.out.println("No se encontó este arriendo.");
+                        System.out.println("No se encontró este arriendo.");
                     }
                     break;
 
-                case 5 : //MOSTRAR LISTA DE ARRIENDOS ACTIVOS
+                case 5: // MOSTRAR LISTA DE ARRIENDOS ACTIVOS
                     System.out.println("===== LISTA ARRIENDOS =====");
                     vc.showRents();
-                    break ;
+                    break;
 
-                case 6 : //MOSTRAR CLIENTES
+                case 6: // MOSTRAR CLIENTES
                     System.out.println("===== CLIENTES =====");
                     vc.showClients();
                     break;
 
-                case 7 : //MOSTRAR PELÍCULAS
-                    System.out.println("===== PELICULAS =====");
+                case 7: // MOSTRAR PELÍCULAS
+                    System.out.println("===== PELÍCULAS =====");
                     vc.showMovies();
-                    break ;
-
-                case 0 : //SALIR DEL PROGRAMA
-                    running = false ;
-                    System.out.println("Saliendo del Videoclub...");
-                    break ;
-
-                default: //OPCIÓN INVÁLIDA
-                    System.out.println("OPCIÓN INVÁLIDA.");
                     break;
 
+                case 0: // SALIR
+                    running = false;
+                    System.out.println("Saliendo del Videoclub...");
+                    break;
+
+                default:
+                    System.out.println("OPCIÓN INVÁLIDA.");
+                    break;
             }
         }
     }
