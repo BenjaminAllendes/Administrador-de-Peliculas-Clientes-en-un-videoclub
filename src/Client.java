@@ -46,29 +46,45 @@ public class Client {
     }
 
     // ----- RENT LIST -----
-    public ArrayList<Rent> getRentList(){
-        return rentList;
-    }
 
     public void addRent(Rent rent){
         rentList.add(rent);
     }
 
     // ----- PAST LIST -----
-    public ArrayList<Rent> getPastList(){
-        return pastList;
-    }
+
 
     public void addPastRent(Rent rent){
         pastList.add(rent);
     }
 
     // ----- RECOMMENDED -----
-    public ArrayList<Movie> getRecommended(){
-        return recommended;
-    }
 
     public void addRecommended(Movie movie){
         recommended.add(movie);
+    }
+    public void removeRent(Rent rent) {
+        rentList.remove(rent);
+    }
+    public Rent findActiveRentByMovieID(int movieID) {
+        for (Rent arriendo : this.rentList) {
+            if (arriendo.getMovie().getID() == movieID) {
+                return arriendo; // Lo encontramos, lo devolvemos
+            }
+        }
+        return null; // No se encontró nada
+    }
+    public void mostrarArriendosActivos() {
+        System.out.println("---------------------------------");
+        System.out.println("Arriendos Activos para: " + this.getName());
+
+        if (rentList.isEmpty()) {
+            System.out.println("No tiene películas arrendadas actualmente.");
+        } else {
+            for (Rent arriendo : rentList) {
+                System.out.println("- ID: " + arriendo.getMovie().getID() + " | Título: " + arriendo.getMovie().getTitle());
+            }
+        }
+        System.out.println("---------------------------------");
     }
 }

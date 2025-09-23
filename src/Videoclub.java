@@ -53,18 +53,12 @@ public class Videoclub {
         Movie m = findMovieByID(movieID);
 
         if (c != null && m != null) {
-            Rent rentToReturn = null;
 
             // Buscar el arriendo activo correspondiente
-            for (Rent r : c.getRentList()) {
-                if (r.getMovie().getID() == movieID) {
-                    rentToReturn = r;
-                    break;
-                }
-            }
+            Rent rentToReturn = c.findActiveRentByMovieID(movieID) ;
 
             if (rentToReturn != null) {
-                c.getRentList().remove(rentToReturn);   // Quitar del listado activo del cliente
+                c.removeRent(rentToReturn);// Quitar del listado activo del cliente
                 c.addPastRent(rentToReturn);           // Agregar al historial
                 rents.remove(rentToReturn);            // Quitar de lista global de arriendos activos
                 m.increaseStock();                     // Devolver stock de la película

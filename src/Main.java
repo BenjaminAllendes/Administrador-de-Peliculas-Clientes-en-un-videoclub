@@ -112,25 +112,21 @@ public class Main {
                         break;
                     }
 
-                    System.out.println("===== RECOMENDACIONES PARA " + c3.getName() + " =====");
-                    if (c3.getRecommended().isEmpty()) {
-                        System.out.println("No hay recomendaciones disponibles.");
-                    } else {
-                        for (Movie rec : c3.getRecommended()) {
-                            System.out.println("- " + rec.getTitle() + " (" + rec.getGenre() + ")");
-                        }
-                    }
+                    System.out.println("===== RECOMENDACIONES PARA " + c3.getName() + " =====") ;
                     break;
 
                 case 4: // DEVOLVER PELÍCULA
-                    System.out.println("Ingrese su ID de Cliente: ");
+                    System.out.println("\n--- Seleccione el Cliente ---");
+                    vc.showClients();
+                    System.out.print("Ingrese el ID del cliente que realiza la devolucion: ");
                     int clientReturnID = Integer.parseInt(br.readLine());
                     Client c2 = vc.findClientByID(clientReturnID);
                     if (c2 == null) {
                         System.out.println("NO EXISTE INFORMACIÓN DE ESTE USUARIO.");
                         break;
                     }
-
+                    System.out.println("\nPelículas actualmente arrendadas por " + c2.getName() + ":");
+                    c2.mostrarArriendosActivos(); // 💡
                     System.out.println("Ingrese ID de la película: ");
                     int movieReturnID = Integer.parseInt(br.readLine());
 
