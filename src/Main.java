@@ -47,15 +47,18 @@ public class Main {
                     break;
 
                 case 2: // REALIZAR ARRIENDO
-                    System.out.println("Ingrese su ID de Cliente: ");
+                    System.out.println("\n--- Seleccione el Cliente ---");
+                    vc.showClients(); // <-- MEJORA: Muestra la lista de clientes
+                    System.out.print("Ingrese el ID del cliente que realiza el arriendo: ");
                     int clientID = Integer.parseInt(br.readLine());
                     Client c1 = vc.findClientByID(clientID);
                     if (c1 == null) {
                         System.out.println("NO EXISTE INFORMACIÓN DE ESTE USUARIO.");
                         break;
                     }
-
-                    System.out.println("Ingrese ID de la película: ");
+                    System.out.println("\n--- Catálogo de Películas Disponibles ---");
+                    vc.showMovies(); // <-- MEJORA: Muestra la lista de películas
+                    System.out.print("\nIngrese el ID de la película que desea arrendar: ");
                     int movieID = Integer.parseInt(br.readLine());
                     System.out.println("Ingrese días de arriendo: ");
                     int days = Integer.parseInt(br.readLine());
@@ -68,8 +71,10 @@ public class Main {
                     break;
 
                 case 3: // VER RECOMENDACIONES
-                    System.out.println("Ingrese su ID de Cliente: ");
-                    int recClientID = Integer.parseInt(br.readLine());
+
+                    System.out.println("\n--- Seleccione el Cliente ---");
+                    vc.showClients();
+                    System.out.print("Ingrese el ID del cliente para ver sus recomendaciones: ");                    int recClientID = Integer.parseInt(br.readLine());
                     Client c3 = vc.findClientByID(recClientID);
                     if (c3 == null){
                         System.out.println("NO EXISTE INFORMACIÓN DE ESTE USUARIO.");
