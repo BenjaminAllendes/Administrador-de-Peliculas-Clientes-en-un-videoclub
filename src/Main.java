@@ -40,10 +40,41 @@ public class Main {
                 case 1: // REGISTRO DE CLIENTE
                     int id = (int)(Math.random()*9000) + 1000;
                     System.out.println("ID asignado automáticamente: " + id);
-                    System.out.println("Ingrese su nombre: ");
-                    String name = br.readLine();
-                    vc.addClient(new Client(id, name));
-                    System.out.println("Cliente añadido correctamente con ID " + id);
+
+                    // SUBMENÚ PARA ELEGIR EL TIPO DE NOMBRE
+                    System.out.println("¿Cómo desea registrar su nombre?");
+                    System.out.println("1. Solo nombre");
+                    System.out.println("2. Nombre y apellido");
+                    System.out.println("Escoja una opción: ");
+
+                    int nameOption = Integer.parseInt(br.readLine());
+                    String name ;
+                    switch (nameOption) {
+                        case 1:
+                            System.out.println("Ingrese su nombre: ");
+                            name = br.readLine();
+                            vc.addClient(new Client(id, name));
+                            System.out.println("Cliente añadido correctamente con ID " + id);
+                            break ;
+
+                        case 2:
+                            System.out.println("Ingrese su nombre: ");
+                            String firstName = br.readLine();
+                            System.out.println("Ingrese su apellido: ");
+                            String lastName = br.readLine();
+
+                            // Se crea una instancia Client y se usa la sobrecarga de métodos
+                            Client newClient = new Client(id, "") ;
+                            newClient.setName(firstName, lastName);
+                            vc.addClient(newClient);
+                            System.out.println("Cliente añadido correctamente con ID " + id);
+                            break;
+
+                        default:
+                            System.out.println("Opción de nombre inválido. Registro cancelado.");
+                            break ;
+                    }
+
                     break;
 
                 case 2: // REALIZAR ARRIENDO

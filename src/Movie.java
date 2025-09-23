@@ -60,5 +60,4 @@ public class Movie {
             this.stock += cantidad;
         }
     }
-
 }
