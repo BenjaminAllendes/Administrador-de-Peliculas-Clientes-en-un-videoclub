@@ -18,8 +18,12 @@ public class Videoclub {
         clients.put(c.getId(), c);
     }
 
-    public Client findClientByID(int id) {
-        return clients.get(id);
+    public Client findClientByID(int id) throws RecursoNoEncontradoException {
+        Client c = clients.get(id);
+        if (c == null) {
+            throw new RecursoNoEncontradoException("No se encontró un cliente con el ID: " + id);
+        }
+        return c;
     }
 
     // ----- PELÍCULAS -----
@@ -27,28 +31,36 @@ public class Videoclub {
         movies.put(m.getID(), m);
     }
 
-    public Movie findMovieByID(int id) {
-        return movies.get(id);
+    public Movie findMovieByID(int id) throws RecursoNoEncontradoException  {
+        Movie m = movies.get(id);
+        if (m == null) {
+            throw new RecursoNoEncontradoException("No se encontró una película con el ID: " + id);
+        }
+        return m;
     }
 
     // ----- ARRENDAR PELÍCULA -----
-    public boolean rentMovie(int clientID, int movieID, int days) {
+    public boolean rentMovie(int clientID, int movieID, int days) throws RecursoNoEncontradoException, PeliculaSinStockException {
+
         Client c = findClientByID(clientID);
         Movie m = findMovieByID(movieID);
 
-        if (c != null && m != null && m.estaDisponible()) {
-            LocalDate today = LocalDate.now();
-            LocalDate returnDate = today.plusDays(days);
-
-            Rent r = new Rent(c, m, today, returnDate);
-            rents.add(r);  // Agrega arriendo a lista global de arriendos
-            return true;
+        // 2. CAMBIA la lógica: si no está disponible, LANZA la excepción
+        if (!m.estaDisponible()) {
+            throw new PeliculaSinStockException(m.getTitle()); // Esta línea es la que faltaba
         }
-        return false;
+
+        // Si el código llega hasta aquí, significa que hay stock y todo está bien.
+        LocalDate today = LocalDate.now();
+        LocalDate returnDate = today.plusDays(days);
+
+        Rent r = new Rent(c, m, today, returnDate);
+        rents.add(r);
+        return true;
     }
 
     // ----- DEVOLVER PELÍCULA -----
-    public boolean returnMovie(int clientID, int movieID) {
+    public boolean returnMovie(int clientID, int movieID) throws RecursoNoEncontradoException {
         Client c = findClientByID(clientID);
         Movie m = findMovieByID(movieID);
 
