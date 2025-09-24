@@ -31,6 +31,7 @@ public class Main {
             System.out.println("5. Ver lista de Arriendos");
             System.out.println("6. Ver Socios");
             System.out.println("7. Ver Películas");
+            System.out.println("8. Actualizar Stock (SOLO EMPLEADOS)");
             System.out.println("0. Salir");
             System.out.print("Elige una opción: ");
 
@@ -105,7 +106,8 @@ public class Main {
 
                     System.out.println("\n--- Seleccione el Cliente ---");
                     vc.showClients();
-                    System.out.print("Ingrese el ID del cliente para ver sus recomendaciones: ");                    int recClientID = Integer.parseInt(br.readLine());
+                    System.out.print("Ingrese el ID del cliente para ver sus recomendaciones: ");
+                    int recClientID = Integer.parseInt(br.readLine());
                     Client c3 = vc.findClientByID(recClientID);
                     if (c3 == null){
                         System.out.println("NO EXISTE INFORMACIÓN DE ESTE USUARIO.");
@@ -150,6 +152,44 @@ public class Main {
                 case 7: // MOSTRAR PELÍCULAS
                     System.out.println("===== PELÍCULAS =====");
                     vc.showMovies();
+                    break;
+
+                case 8: // ACT STOCK
+                    System.out.println("\n--- Catálogo de Películas ---");
+                    vc.showMovies(); // <-- MEJORA: Muestra la lista de películas
+                    System.out.print("Ingrese el ID de la película que desea actualizar su stock: ");
+                    int movieIDSt = Integer.parseInt(br.readLine());
+
+                    Movie movieToUpdate = vc.findMovieByID(movieIDSt);
+
+                    if (movieToUpdate == null) {
+                        System.out.println("No se encontró una película con el ID " + movieIDSt);
+                        break ;
+                    }
+
+                    System.out.println("¿Como desea actualizar el stock?");
+                    System.out.println("1. Aumentar en 1 unidad.");
+                    System.out.println("2. Aumentar en una cantidad especifica.");
+                    System.out.println("Eliga una opción: ");
+                    int stockOption = Integer.parseInt(br.readLine()) ;
+
+                    switch (stockOption) {
+                        case 1:
+                            movieToUpdate.increaseStock();
+                            System.out.println("Stock de "+ movieToUpdate.getTitle()+" actualizado en 1 unidad. Nuevo stock: " + movieToUpdate.getStock());
+                            break ;
+
+                        case 2:
+                            System.out.println("Ingrese la cantidad a agregar: ");
+                            int cantidad = Integer.parseInt(br.readLine());
+                            movieToUpdate.increaseStock(cantidad);
+                            System.out.println("Stock de "+ movieToUpdate.getTitle()+" actualizado en: " + cantidad + " unidades. Nuevo stock: " + movieToUpdate.getStock());
+                            break;
+
+                        default:
+                            System.out.println("Opción inválida.");
+                            break ;
+                    }
                     break;
 
                 case 0: // SALIR
