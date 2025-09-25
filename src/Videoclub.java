@@ -103,4 +103,34 @@ public class Videoclub {
             r.showInfo();
         }
     }
+    // Nuevos metodos para el GUI
+    public String getRentsInfo() {
+        StringBuilder sb = new StringBuilder();
+        for (Rent r : rents) {
+            sb.append("Cliente: ").append(r.getRentClient().getName())
+                    .append(" | Película: ").append(r.getMovie().getTitle())
+                    .append(" | Fecha de devolución: ").append(r.getReturnDate()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public String getClientsInfo() {
+        StringBuilder sb = new StringBuilder();
+        for (Client c : clients.values()) { // Accedemos directamente al mapa
+            sb.append("ID: ").append(c.getId())
+                    .append(" | Nombre: ").append(c.getName()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public String getMoviesInfo() {
+        StringBuilder sb = new StringBuilder();
+        for (Movie m : movies.values()) { // Accedemos directamente al mapa
+            sb.append("ID: ").append(m.getID())
+                    .append(" | Título: ").append(m.getTitle())
+                    .append(" | Género: ").append(m.getGenre())
+                    .append(" | Stock: ").append(m.getStock()).append("\n");
+        }
+        return sb.toString();
+    }
 }
