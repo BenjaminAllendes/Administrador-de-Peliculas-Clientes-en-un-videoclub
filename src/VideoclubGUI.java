@@ -33,6 +33,9 @@ public class VideoclubGUI extends JFrame {
         JButton showClientsButton = new JButton("6. Ver Socios");
         JButton showMoviesButton = new JButton("7. Ver Catálogo");
         JButton updateStockButton = new JButton("8. Actualizar Stock");
+        JButton manageClientsButton = new JButton("9. Gestionar Clientes");
+        JButton viewClientProfileButton = new JButton("10. Ver Perfil de Cliente");
+
         JButton exitButton = new JButton("0. Salir");
 
         menuPanel.add(registerButton);
@@ -43,6 +46,9 @@ public class VideoclubGUI extends JFrame {
         menuPanel.add(showMoviesButton);
         menuPanel.add(updateStockButton);
         menuPanel.add(exitButton);
+        menuPanel.add(manageClientsButton); // NUEVO
+        menuPanel.add(viewClientProfileButton);
+        menuPanel.add(exitButton);
 
         // --- MANEJO DE EVENTOS (Lambda Expressions) ---
         registerButton.addActionListener(e -> handleRegistration());
@@ -52,6 +58,8 @@ public class VideoclubGUI extends JFrame {
         showClientsButton.addActionListener(e -> displayClients());
         showMoviesButton.addActionListener(e -> displayMovies());
         updateStockButton.addActionListener(e -> handleStockUpdate());
+        manageClientsButton.addActionListener(e -> handleManageClient());
+        viewClientProfileButton.addActionListener(e -> handleViewClientProfile());
         exitButton.addActionListener(e -> System.exit(0));
 
         setVisible(true);
@@ -64,14 +72,13 @@ public class VideoclubGUI extends JFrame {
     private void handleRegistration() {
         String name = JOptionPane.showInputDialog(this, "Ingrese su nombre:");
         if (name != null && !name.isEmpty()) {
-            int id = (int)(Math.random() * 9000) + 1000;
+            int id = (int) (Math.random() * 9000) + 1000;
             Client newClient = new Client(id, name);
             videoclub.addClient(newClient);
             displayArea.append("✅ Cliente '" + name + "' añadido con ID: " + id + "\n");
         }
     }
 
-// En VideoclubGUI.java
 
     private void handleRent() {
         try {
@@ -96,7 +103,6 @@ public class VideoclubGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error General", JOptionPane.ERROR_MESSAGE);
         }
     }
-// En VideoclubGUI.java
 
     private void handleReturn() {
         try {
@@ -116,6 +122,7 @@ public class VideoclubGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error General", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private void displayRents() {
         displayArea.append("===== LISTA DE ARRIENDOS ACTIVOS =====\n");
         displayArea.append(videoclub.getRentsInfo()); // Usamos el nuevo metodo
@@ -148,4 +155,75 @@ public class VideoclubGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void handleManageClient() {
+        try {
+            String idStr = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente a gestionar:");
+            if (idStr == null) return; // El usuario canceló
+            int clientID = Integer.parseInt(idStr);
+            Client client = videoclub.findClientByID(clientID); // Valida que exista
+
+            Object[] options = {"Modificar Nombre", "Eliminar Cliente", "Cancelar"};
+            int choice = JOptionPane.showOptionDialog(this,
+                    "¿Qué desea hacer con el cliente '" + client.getName() + "'?",
+                    "Gestionar Cliente",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    null, options, options[0]);
+
+            if (choice == 0) { // Modificar Nombre
+                String newName = JOptionPane.showInputDialog(this, "Ingrese el nuevo nombre:", client.getName());
+                if (newName != null && !newName.trim().isEmpty()) {
+                    videoclub.modifyClientName(clientID, newName);
+                    displayArea.append("✅ Nombre del cliente " + clientID + " actualizado a '" + newName + "'.\n");
+                }
+            } else if (choice == 1) { // Eliminar Cliente
+                int confirm = JOptionPane.showConfirmDialog(this,
+                        "¿Está seguro de que desea eliminar a '" + client.getName() + "'? Esta acción no se puede deshacer.",
+                        "Confirmar Eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    videoclub.removeClient(clientID);
+                    displayArea.append("✅ Cliente '" + client.getName() + "' eliminado.\n");
+                }
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Ingrese un ID numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (RecursoNoEncontradoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void handleViewClientProfile() {
+        try {
+            String idStr = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente para ver su perfil:");
+            if (idStr == null || idStr.trim().isEmpty()) return;
+            int clientID = Integer.parseInt(idStr);
+
+            Client client = videoclub.findClientByID(clientID);
+
+            StringBuilder profile = new StringBuilder();
+            profile.append("===== PERFIL DEL CLIENTE =====\n");
+            profile.append("ID: ").append(client.getId()).append("\n");
+            profile.append("Nombre: ").append(client.getName()).append("\n\n");
+
+            profile.append("--- Arriendos Activos ---\n");
+            profile.append(client.getActiveRentsInfo()); //
+
+            profile.append("\n--- Historial de Arriendos ---\n");
+            profile.append(client.getPastRentsInfo()); //
+
+            profile.append("==========================\n");
+
+            // El resto del código para mostrar el JOptionPane se mantiene igual
+            JTextArea textArea = new JTextArea(profile.toString());
+            textArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            JOptionPane.showMessageDialog(this, scrollPane, "Perfil de " + client.getName(), JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Ingrese un ID numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (RecursoNoEncontradoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }

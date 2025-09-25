@@ -133,4 +133,49 @@ public class Videoclub {
         }
         return sb.toString();
     }
+    public void removeClient(int id) throws RecursoNoEncontradoException {
+        if (!clients.containsKey(id)) {
+            throw new RecursoNoEncontradoException("No se puede eliminar: No existe cliente con ID " + id);
+        }
+        // Adicional: Lógica para manejar arriendos activos si es necesario
+        clients.remove(id);
+    }
+
+    public void modifyClientName(int id, String newName) throws RecursoNoEncontradoException {
+        Client clientToModify = findClientByID(id); // Reutilizamos el método de búsqueda
+        clientToModify.setName(newName);
+    }
+    public void removeMovie(int id) throws RecursoNoEncontradoException {
+        if (!movies.containsKey(id)) {
+            throw new RecursoNoEncontradoException("No se puede eliminar: No existe película con ID " + id);
+        }
+        movies.remove(id);
+    }
+
+    public void modifyMovieTitle(int id, String newTitle) throws RecursoNoEncontradoException {
+        Movie movieToModify = findMovieByID(id);
+        movieToModify.setTitle(newTitle);
+    }
+    public Movie findMovieByTitle(String title) throws RecursoNoEncontradoException {
+        for (Movie movie : movies.values()) {
+            if (movie.getTitle().equalsIgnoreCase(title)) {
+                return movie;
+            }
+        }
+        throw new RecursoNoEncontradoException("No se encontró ninguna película con el título: " + title);
+    }
+
+    public Client findClientByRentedMovieID(int movieID) throws RecursoNoEncontradoException {
+        // Primero, valida que la película exista
+        findMovieByID(movieID);
+
+        for (Client client : clients.values()) {
+            if (client.findActiveRentByMovieID(movieID) != null) {
+                return client;
+            }
+        }
+        throw new RecursoNoEncontradoException("Ningún cliente tiene arrendada la película con ID: " + movieID);
+    }
+
 }
+

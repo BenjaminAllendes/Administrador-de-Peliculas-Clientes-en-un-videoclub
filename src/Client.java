@@ -87,4 +87,30 @@ public class Client {
         }
         System.out.println("---------------------------------");
     }
+
+    public String getActiveRentsInfo() {
+        if (rentList.isEmpty()) {
+            return "No tiene arriendos activos.\n";
+        }
+
+        StringBuilder info = new StringBuilder();
+        for (Rent rent : rentList) {
+            info.append("- ").append(rent.getMovie().getTitle())
+                    .append(" (Devolución: ").append(rent.getReturnDate()).append(")\n");
+        }
+        return info.toString();
+    }
+
+    public String getPastRentsInfo() {
+        if (pastList.isEmpty()) {
+            return "No tiene historial de arriendos.\n";
+        }
+
+        StringBuilder info = new StringBuilder();
+        for (Rent rent : pastList) {
+            info.append("- ").append(rent.getMovie().getTitle())
+                    .append(" (Arrendado el: ").append(rent.getRentDate()).append(")\n");
+        }
+        return info.toString();
+    }
 }
