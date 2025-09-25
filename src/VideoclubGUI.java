@@ -1,0 +1,143 @@
+import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.time.LocalDate;
+
+public class VideoclubGUI extends JFrame {
+    private Videoclub videoclub;
+    private JTextArea displayArea;
+
+    public VideoclubGUI(Videoclub vc) {
+        super("Videoclub - Gestión de Arriendos");
+        this.videoclub = vc;
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(900, 700);
+        setLayout(new BorderLayout());
+
+        // Área de texto para mostrar logs y resultados
+        displayArea = new JTextArea();
+        displayArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(displayArea);
+        add(scrollPane, BorderLayout.CENTER);
+
+        // Panel de botones para el menú principal en el lado izquierdo
+        JPanel menuPanel = new JPanel();
+        menuPanel.setLayout(new GridLayout(0, 1, 10, 10)); // Botones en columna
+        add(menuPanel, BorderLayout.WEST);
+
+        // Creación y adición de botones
+        JButton registerButton = new JButton("1. Registrarse");
+        JButton rentButton = new JButton("2. Realizar Arriendo");
+        JButton returnButton = new JButton("4. Devolver Película");
+        JButton showRentsButton = new JButton("5. Ver Arriendos Activos");
+        JButton showClientsButton = new JButton("6. Ver Socios");
+        JButton showMoviesButton = new JButton("7. Ver Catálogo");
+        JButton updateStockButton = new JButton("8. Actualizar Stock");
+        JButton exitButton = new JButton("0. Salir");
+
+        menuPanel.add(registerButton);
+        menuPanel.add(rentButton);
+        menuPanel.add(returnButton);
+        menuPanel.add(showRentsButton);
+        menuPanel.add(showClientsButton);
+        menuPanel.add(showMoviesButton);
+        menuPanel.add(updateStockButton);
+        menuPanel.add(exitButton);
+
+        // --- MANEJO DE EVENTOS (Lambda Expressions) ---
+        registerButton.addActionListener(e -> handleRegistration());
+        rentButton.addActionListener(e -> handleRent());
+        returnButton.addActionListener(e -> handleReturn());
+        showRentsButton.addActionListener(e -> displayRents());
+        showClientsButton.addActionListener(e -> displayClients());
+        showMoviesButton.addActionListener(e -> displayMovies());
+        updateStockButton.addActionListener(e -> handleStockUpdate());
+        exitButton.addActionListener(e -> System.exit(0));
+
+        setVisible(true);
+    }
+
+    // ======================================
+    // MÉTODOS PARA CADA FUNCIONALIDAD
+    // ======================================
+
+    private void handleRegistration() {
+        String name = JOptionPane.showInputDialog(this, "Ingrese su nombre:");
+        if (name != null && !name.isEmpty()) {
+            int id = (int)(Math.random() * 9000) + 1000;
+            Client newClient = new Client(id, name);
+            videoclub.addClient(newClient);
+            displayArea.append("✅ Cliente '" + name + "' añadido con ID: " + id + "\n");
+        }
+    }
+
+    private void handleRent() {
+        try {
+            int clientID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:"));
+            int movieID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID de la película:"));
+            int days = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese días de arriendo:"));
+
+            boolean success = videoclub.rentMovie(clientID, movieID, days);
+            if (success) {
+                displayArea.append("✅ Arriendo realizado con éxito.\n");
+            } else {
+                displayArea.append("❌ No se pudo realizar el arriendo.\n");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: Ingrese números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void handleReturn() {
+        try {
+            int clientID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:"));
+            int movieID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID de la película a devolver:"));
+
+            boolean success = videoclub.returnMovie(clientID, movieID);
+            if (success) {
+                displayArea.append("✅ Película devuelta correctamente.\n");
+            } else {
+                displayArea.append("❌ No se pudo encontrar el arriendo para la devolución.\n");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: Ingrese números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void displayRents() {
+        displayArea.append("===== LISTA DE ARRIENDOS ACTIVOS =====\n");
+        displayArea.append(videoclub.getRentsInfo()); // Usamos el nuevo metodo
+        displayArea.append("====================================\n");
+    }
+
+    private void displayClients() {
+        displayArea.append("===== LISTA DE CLIENTES REGISTRADOS =====\n");
+        displayArea.append(videoclub.getClientsInfo());
+        displayArea.append("=========================================\n");
+    }
+
+    private void displayMovies() {
+        displayArea.append("===== CATÁLOGO DE PELÍCULAS =====\n");
+        displayArea.append(videoclub.getMoviesInfo());
+        displayArea.append("=================================\n");
+    }
+
+    private void handleStockUpdate() {
+        try {
+            int movieID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID de la película a actualizar:"));
+            int cantidad = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la cantidad a agregar al stock:"));
+
+            Movie movieToUpdate = videoclub.findMovieByID(movieID);
+            movieToUpdate.increaseStock(cantidad);
+            displayArea.append("✅ Stock de '" + movieToUpdate.getTitle() + "' actualizado. Nuevo stock: " + movieToUpdate.getStock() + "\n");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: Ingrese un ID o cantidad válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
