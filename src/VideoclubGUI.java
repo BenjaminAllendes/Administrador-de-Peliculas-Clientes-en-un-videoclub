@@ -71,43 +71,51 @@ public class VideoclubGUI extends JFrame {
         }
     }
 
+// En VideoclubGUI.java
+
     private void handleRent() {
         try {
             int clientID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:"));
             int movieID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID de la película:"));
             int days = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese días de arriendo:"));
 
-            boolean success = videoclub.rentMovie(clientID, movieID, days);
-            if (success) {
-                displayArea.append("✅ Arriendo realizado con éxito.\n");
-            } else {
-                displayArea.append("❌ No se pudo realizar el arriendo.\n");
-            }
+            // Ya no necesitamos la variable 'boolean'. Si este método falla,
+            // lanzará una excepción que será capturada abajo.
+            videoclub.rentMovie(clientID, movieID, days);
+
+            // Si el código llega a esta línea, significa que no hubo excepciones y todo salió bien.
+            displayArea.append("✅ Arriendo realizado con éxito.\n");
+
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error: Ingrese números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error: Ingrese números válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+
+        } catch (RecursoNoEncontradoException | PeliculaSinStockException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error de Arriendo", JOptionPane.ERROR_MESSAGE);
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error General", JOptionPane.ERROR_MESSAGE);
         }
     }
+// En VideoclubGUI.java
 
     private void handleReturn() {
         try {
             int clientID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:"));
             int movieID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID de la película a devolver:"));
 
-            boolean success = videoclub.returnMovie(clientID, movieID);
-            if (success) {
-                displayArea.append("✅ Película devuelta correctamente.\n");
-            } else {
-                displayArea.append("❌ No se pudo encontrar el arriendo para la devolución.\n");
-            }
+            videoclub.returnMovie(clientID, movieID);
+            displayArea.append("✅ Película devuelta correctamente.\n");
+
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error: Ingrese números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error: Ingrese números válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+
+        } catch (RecursoNoEncontradoException e) { // Aquí solo puede ocurrir esta excepción personalizada
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error en Devolución", JOptionPane.ERROR_MESSAGE);
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error General", JOptionPane.ERROR_MESSAGE);
         }
     }
-
     private void displayRents() {
         displayArea.append("===== LISTA DE ARRIENDOS ACTIVOS =====\n");
         displayArea.append(videoclub.getRentsInfo()); // Usamos el nuevo metodo

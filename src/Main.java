@@ -156,7 +156,7 @@ public class Main {
             vc.addMovie(new Movie(3, "El Señor de los Anillos", "Fantasía", 5));
             vc.addMovie(new Movie(4, "Toy Story", "Animación", 4));
             vc.addMovie(new Movie(5, "Los Increíbles", "Animación", 0));
-            System.out.println("✅ 5 películas precargadas en el sistema.");
+            System.out.println("5 películas precargadas en el sistema.");
 
             // Se inicializa y muestra la ventana de la aplicación
             new VideoclubGUI(vc);
