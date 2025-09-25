@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 import java.time.LocalDate;
 
@@ -12,6 +13,134 @@ public class Videoclub {
         movies = new HashMap<>();
         rents = new ArrayList<>();
     }
+
+
+
+
+
+    //inasnjsajnasbjasbjasfbhafasaf
+    public void saveData() {
+        saveClientsToFile("clients.csv");
+        saveMoviesToFile("movies.csv");
+        saveRentsToFile("rents.csv");
+    }
+
+    private void saveClientsToFile(String filename) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+            for (Client c : clients.values()) {
+                pw.println(c.getId() + "," + c.getName());
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar clientes: " + e.getMessage());
+        }
+    }
+
+    private void saveMoviesToFile(String filename) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+            for (Movie m : movies.values()) {
+                pw.println(m.getID() + "," + m.getTitle() + "," + m.getGenre() + "," + m.getStock());
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar películas: " + e.getMessage());
+        }
+    }
+
+    private void saveRentsToFile(String filename) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+            for (Rent r : rents) {
+                pw.println(r.toCSV());
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar arriendos: " + e.getMessage());
+        }
+    }
+
+    //jkasjsakasbhkkaskbhabhkshbksa
+
+    //nkasbkasdbkasdjkaskjsad
+    public void loadData() {
+        loadClientsFromFile("clients.csv");
+        loadMoviesFromFile("movies.csv");
+        loadRentsFromFile("rents.csv");
+    }
+
+    private void loadClientsFromFile(String filename) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0]);
+                String name = parts[1];
+                clients.put(id, new Client(id, name));
+            }
+        } catch (IOException e) {
+            System.out.println("No se pudo cargar clientes (posible primera ejecución)");
+        }
+    }
+
+    private void loadMoviesFromFile(String filename) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                line = line.trim(); // Elimina espacios al inicio y fin
+                if (line.isEmpty()) continue; // Ignora líneas vacías
+
+                String[] parts = line.split(",");
+                if (parts.length < 4) continue; // Ignora líneas incompletas
+
+                int id = Integer.parseInt(parts[0]);
+                String title = parts[1];
+                String genre = parts[2];
+                int stock = Integer.parseInt(parts[3]);
+
+                Movie m = new Movie(id, title, genre, stock);
+                movies.put(id, m);
+            }
+        } catch (IOException e) {
+            System.out.println("No se pudo cargar películas (posible primera ejecución)");
+        }
+    }
+
+
+    private void loadRentsFromFile(String filename) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                try {
+                    Rent r = Rent.fromCSV(line, this); // usa el método de la clase Rent
+                    rents.add(r); // ya se agrega también al cliente dentro del constructor
+                } catch (RecursoNoEncontradoException e) {
+                    System.out.println("No se pudo cargar arriendo: " + e.getMessage());
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("No se pudo cargar arriendos (posible primera ejecución)");
+        }
+    }
+
+
+    //anjasjsakka sk as
+
+    public void generarReporteTXT(String filename) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+            pw.println("==== REPORTE VIDEOCLUB ====");
+            pw.println("\nClientes:");
+            pw.println(getClientsInfo());
+
+            pw.println("\nPelículas:");
+            pw.println(getMoviesInfo());
+
+            pw.println("\nArriendos:");
+            pw.println(getRentsInfo());
+        } catch (IOException e) {
+            System.out.println("Error al generar reporte: " + e.getMessage());
+        }
+    }
+
+
+
+
+
 
     // ----- CLIENTES -----
     public void addClient(Client c) {

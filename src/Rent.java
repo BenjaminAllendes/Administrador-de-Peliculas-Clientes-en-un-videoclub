@@ -19,6 +19,24 @@ public class Rent {
         // Disminuye el stock de la película
         movie.decreaseStock();
     }
+    public static Rent fromCSV(String line, Videoclub vc) throws RecursoNoEncontradoException {
+        String[] parts = line.split(",");
+        int clientID = Integer.parseInt(parts[0]);
+        int movieID = Integer.parseInt(parts[1]);
+        LocalDate rentDate = LocalDate.parse(parts[2]);
+        LocalDate returnDate = LocalDate.parse(parts[3]);
+
+        Client c = vc.findClientByID(clientID);
+        Movie m = vc.findMovieByID(movieID);
+
+        return new Rent(c, m, rentDate, returnDate);
+    }
+
+
+    public String toCSV() {
+        return rentClient.getId() + "," + movie.getID() + "," + rentDate + "," + returnDate;
+    }
+
 
     // ----- GETTERS y SETTERS -----
     public Client getRentClient() {

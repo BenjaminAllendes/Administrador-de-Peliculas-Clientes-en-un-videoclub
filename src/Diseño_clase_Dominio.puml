@@ -1,38 +1,17 @@
 @startuml
 
-Rent -- Videoclub
-Movie -- Videoclub
-Client -- Videoclub
-Client -- Movie
-Client -- Rent
-
 class Rent{
 rentClient : Client
 movie : Movie
 rentDate : LocalDate
 returnDate : LocalDate
-..Getter-Setter..
-+void setRentClient()
-+Client getRentClient()
-+void setMovie()
-+void setRentDate()
-+LocalDate getRentDate()
-+void setReturnDate()
-+LocalDate getReturnDate()
-__Funcionalidades__
-+void showInfo()
+
 }
 
 class Videoclub{
 clients : Map<Integer, Client>
 movies : Map<Integer, Movie>
 rents : ArrayList<Rent>
-__Funcionalidades__
-+boolean rentMovie()
-+boolean returnMovie()
-+void showClients()
-+void showMovies()
-+void showRents()
 }
 
 class Movie{
@@ -40,37 +19,13 @@ ID : int
 title : String
 genre : String
 stock : int
-..Getter-Setter..
-+void setTitle()
-+String getTitle()
-+void setGenre()
-+String getGenre()
-+void setID()
-+int getID()
-+void void setStock()
-+int getStock()
-__Funcionalidades__
-+boolean estaDisponible()
-+void decreaseStock()
-+void increaseStock()
 }
 
 class Client{
 ID : Int
 name : String
-rent_list : ArrayList<Rent>
-past_list : ArrayList<Rent>
-recommended : ArrayList<Movie>
-..Getter-Setter..
-+void setID()
-+int getID()
-+void setName()
-+String getNampe()
-+void setRent_list()
-+ArrayList<Rent>getRent_list()
-+void setPast_list()
-+ArrayList<Rent>getPast_list()
-+void setRecommended()
-+ArrayList<Movie>getRecommended()
+rent_list : ArrayList<String>
+past_list : ArrayList<String>
+recommended : ArrayList<String>
 }
 @enduml

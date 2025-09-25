@@ -1,0 +1,33 @@
+==== REPORTE VIDEOCLUB ====
+
+Clientes:
+ID: 8451 | Nombre: Dante López
+
+
+Películas:
+ID: 1 | Título: Matrix | Género: Acción | Stock: 4
+ID: 2 | Título: Titanic | Género: Romance | Stock: 3
+ID: 3 | Título: El Señor de los Anillos | Género: Fantasía | Stock: 4
+ID: 4 | Título: Toy Story | Género: Animación | Stock: 6
+ID: 5 | Título: Los Increíbles | Género: Animación | Stock: 2
+ID: 6 | Título: Avengers: Endgame | Género: Acción | Stock: 7
+ID: 7 | Título: Inception | Género: Sci-Fi | Stock: 5
+ID: 8 | Título: La La Land | Género: Romance | Stock: 3
+ID: 9 | Título: Gladiator | Género: Acción | Stock: 4
+ID: 10 | Título: El Rey León | Género: Animación | Stock: 5
+ID: 11 | Título: Parasite | Género: Thriller | Stock: 3
+ID: 12 | Título: Jurassic Park | Género: Aventura | Stock: 6
+ID: 13 | Título: Interstellar | Género: Sci-Fi | Stock: 4
+ID: 14 | Título: Forrest Gump | Género: Drama | Stock: 5
+ID: 15 | Título: Harry Potter y la Piedra Filosofal | Género: Fantasía | Stock: 7
+ID: 16 | Título: Spider-Man: No Way Home | Género: Acción | Stock: 6
+ID: 17 | Título: Coco | Género: Animación | Stock: 4
+ID: 18 | Título: Avatar | Género: Sci-Fi | Stock: 5
+ID: 19 | Título: The Godfather | Género: Drama | Stock: 3
+ID: 20 | Título: Shrek | Género: Animación | Stock: 6
+ID: 21 | Título: Ratatouille | Género: Animación | Stock: 2
+
+
+Arriendos:
+Cliente: Dante López | Película: Ratatouille | Fecha de devolución: 2025-10-09
+

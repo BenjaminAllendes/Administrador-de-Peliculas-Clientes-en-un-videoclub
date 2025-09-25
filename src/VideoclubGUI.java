@@ -10,7 +10,22 @@ public class VideoclubGUI extends JFrame {
     public VideoclubGUI(Videoclub vc) {
         super("Videoclub - Gestión de Arriendos");
         this.videoclub = vc;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                // Guardar datos al salir
+                videoclub.saveData();
+                //Generar Reporte
+                videoclub.generarReporteTXT("reporte_videoclub.txt");
+                System.exit(0); // Luego de guardar, salir
+            }
+        });
+
+
+
+
         setSize(900, 700);
         setLayout(new BorderLayout());
 
@@ -60,8 +75,16 @@ public class VideoclubGUI extends JFrame {
         updateStockButton.addActionListener(e -> handleStockUpdate());
         manageClientsButton.addActionListener(e -> handleManageClient());
         viewClientProfileButton.addActionListener(e -> handleViewClientProfile());
-        exitButton.addActionListener(e -> System.exit(0));
+        exitButton.addActionListener(e -> {
+            // Guardar datos antes de salir
+            videoclub.saveData();
 
+            // Generar reporte
+            videoclub.generarReporteTXT("reporte_videoclub.txt");
+
+            // Finalmente salir
+            System.exit(0);
+        });
         setVisible(true);
     }
 
