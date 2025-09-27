@@ -60,4 +60,9 @@ public class Movie {
             this.stock += cantidad;
         }
     }
+    @Override
+    public String toString() {
+        return id + " - " + title + " | Género: " + genre + " | Stock: " + stock;
+    }
+
 }

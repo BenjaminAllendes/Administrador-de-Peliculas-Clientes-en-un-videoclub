@@ -13,27 +13,29 @@ ID: 1275 | Nombre: Diego Aguayo
 
 
 Películas:
-ID: 1 | Título: Matrix | Género: Acción | Stock: 1
-ID: 2 | Título: Titanic | Género: Romance | Stock: 2
-ID: 3 | Título: El Señor de los Anillos | Género: Fantasía | Stock: 3
-ID: 4 | Título: Toy Story | Género: Animación | Stock: 6
-ID: 5 | Título: Los Increíbles | Género: Animación | Stock: 2
-ID: 6 | Título: Avengers: Endgame | Género: Acción | Stock: 7
-ID: 7 | Título: Inception | Género: Sci-Fi | Stock: 5
-ID: 8 | Título: La La Land | Género: Romance | Stock: 0
-ID: 9 | Título: Gladiator | Género: Acción | Stock: 4
-ID: 10 | Título: El Rey León | Género: Animación | Stock: 5
-ID: 11 | Título: Parasite | Género: Thriller | Stock: 3
-ID: 12 | Título: Jurassic Park | Género: Aventura | Stock: 6
-ID: 13 | Título: Interstellar | Género: Sci-Fi | Stock: 0
-ID: 14 | Título: Forrest Gump | Género: Drama | Stock: 5
-ID: 15 | Título: Harry Potter y la Piedra Filosofal | Género: Fantasía | Stock: 7
-ID: 16 | Título: Spider-Man: No Way Home | Género: Acción | Stock: 6
-ID: 17 | Título: Coco | Género: Animación | Stock: 4
-ID: 18 | Título: Avatar | Género: Sci-Fi | Stock: 0
-ID: 19 | Título: The Godfather | Género: Drama | Stock: 3
-ID: 20 | Título: Shrek | Género: Animación | Stock: 2
-ID: 21 | Título: Ratatouille | Género: Animación | Stock: 1
+ID: 1 | Título: Matrix | Tipo: [NORMAL] | Género: Acción | Stock: 1
+ID: 2 | Título: Titanic | Tipo: [NORMAL] | Género: Romance | Stock: 1
+ID: 3 | Título: El Señor de los Anillos | Tipo: [NORMAL] | Género: Fantasía | Stock: 3
+ID: 4 | Título: Toy Story | Tipo: [NORMAL] | Género: Animación | Stock: 6
+ID: 5 | Título: Los Increíbles | Tipo: [NORMAL] | Género: Animación | Stock: 2
+ID: 6 | Título: Avengers: Endgame | Tipo: [ESTRENO] | Género: Acción | Stock: 7
+ID: 7 | Título: Inception | Tipo: [NORMAL] | Género: Sci-Fi | Stock: 5
+ID: 8 | Título: La La Land | Tipo: [NORMAL] | Género: Romance | Stock: 0
+ID: 9 | Título: Gladiator | Tipo: [NORMAL] | Género: Acción | Stock: 4
+ID: 10 | Título: El Rey León | Tipo: [NORMAL] | Género: Animación | Stock: 5
+ID: 11 | Título: Parasite | Tipo: [NORMAL] | Género: Thriller | Stock: 3
+ID: 12 | Título: Jurassic Park | Tipo: [NORMAL] | Género: Aventura | Stock: 6
+ID: 13 | Título: Interstellar | Tipo: [NORMAL] | Género: Sci-Fi | Stock: 0
+ID: 14 | Título: Forrest Gump | Tipo: [NORMAL] | Género: Drama | Stock: 5
+ID: 15 | Título: Harry Potter y la Piedra Filosofal | Tipo: [NORMAL] | Género: Fantasía | Stock: 7
+ID: 16 | Título: Spider-Man: No Way Home | Tipo: [ESTRENO] | Género: Acción | Stock: 6
+ID: 17 | Título: Coco | Tipo: [NORMAL] | Género: Animación | Stock: 4
+ID: 18 | Título: Avatar | Tipo: [NORMAL] | Género: Sci-Fi | Stock: 0
+ID: 19 | Título: The Godfather | Tipo: [NORMAL] | Género: Drama | Stock: 3
+ID: 20 | Título: Shrek | Tipo: [NORMAL] | Género: Animación | Stock: 1
+ID: 21 | Título: Ratatouille | Tipo: [NORMAL] | Género: Animación | Stock: 1
+ID: 22 | Título: The end of Evangelion | Tipo: [ESTRENO] | Género: Animación | Stock: 10
+ID: 23 | Título: Una Película de Minecraft | Tipo: [ESTRENO] | Género: Comedia | Stock: 3
 
 
 Arriendos:

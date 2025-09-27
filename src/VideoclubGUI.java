@@ -49,7 +49,8 @@ public class VideoclubGUI extends JFrame {
         JButton updateStockButton = new JButton("8. Actualizar Stock");
         JButton manageClientsButton = new JButton("9. Gestionar Clientes");
         JButton viewClientProfileButton = new JButton("10. Ver Perfil de Cliente");
-        JButton viewCleanScreen = new JButton("11. Limpiar Pantalla");
+        JButton addMovieButton = new JButton("11. Agregar Película");
+        JButton viewCleanScreen = new JButton("12. Limpiar Pantalla");
         JButton exitButton = new JButton("0. Salir");
 
         menuPanel.add(registerButton);
@@ -60,8 +61,9 @@ public class VideoclubGUI extends JFrame {
         menuPanel.add(showClientsButton);
         menuPanel.add(showMoviesButton);
         menuPanel.add(updateStockButton);
-        menuPanel.add(manageClientsButton); // NUEVO
+        menuPanel.add(manageClientsButton);
         menuPanel.add(viewClientProfileButton);
+        menuPanel.add(addMovieButton);
         menuPanel.add(viewCleanScreen);
         menuPanel.add(exitButton);
 
@@ -76,6 +78,7 @@ public class VideoclubGUI extends JFrame {
         updateStockButton.addActionListener(e -> handleStockUpdate());
         manageClientsButton.addActionListener(e -> handleManageClient());
         viewClientProfileButton.addActionListener(e -> handleViewClientProfile());
+        addMovieButton.addActionListener(e -> handleAddMovie());
         viewCleanScreen.addActionListener(e -> viewCleanScreen());
         exitButton.addActionListener(e -> {
             // Guardar datos antes de salir
@@ -308,6 +311,40 @@ public class VideoclubGUI extends JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void handleAddMovie() {
+        try {
+            int id = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese ID de la película:"));
+            String title = JOptionPane.showInputDialog(this, "Ingrese título de la película:");
+            String genre = JOptionPane.showInputDialog(this, "Ingrese género:");
+            int stock = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese stock inicial:"));
+
+            Object[] options = {"Normal", "Estreno"};
+            int choice = JOptionPane.showOptionDialog(this,
+                    "¿La película es un estreno?",
+                    "Tipo de Película",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+
+            Movie movie;
+            if (choice == 1) {
+                movie = new NewReleaseMovie(id, title, genre, stock);
+            } else {
+                movie = new Movie(id, title, genre, stock);
+            }
+
+            videoclub.addMovie(movie);
+            displayArea.append("✅ Película añadida: " + movie + "\n");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar la película: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     private void viewCleanScreen(){
         displayArea.setText("");

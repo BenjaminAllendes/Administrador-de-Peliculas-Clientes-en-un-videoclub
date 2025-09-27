@@ -1,21 +1,23 @@
-1,Matrix,Acción,1
-2,Titanic,Romance,2
-3,El Señor de los Anillos,Fantasía,3
-4,Toy Story,Animación,6
-5,Los Increíbles,Animación,2
-6,Avengers: Endgame,Acción,7
-7,Inception,Sci-Fi,5
-8,La La Land,Romance,0
-9,Gladiator,Acción,4
-10,El Rey León,Animación,5
-11,Parasite,Thriller,3
-12,Jurassic Park,Aventura,6
-13,Interstellar,Sci-Fi,0
-14,Forrest Gump,Drama,5
-15,Harry Potter y la Piedra Filosofal,Fantasía,7
-16,Spider-Man: No Way Home,Acción,6
-17,Coco,Animación,4
-18,Avatar,Sci-Fi,0
-19,The Godfather,Drama,3
-20,Shrek,Animación,2
-21,Ratatouille,Animación,1
+1,Matrix,Acción,1,NORMAL
+2,Titanic,Romance,1,NORMAL
+3,El Señor de los Anillos,Fantasía,3,NORMAL
+4,Toy Story,Animación,6,NORMAL
+5,Los Increíbles,Animación,2,NORMAL
+6,Avengers: Endgame,Acción,7,ESTRENO
+7,Inception,Sci-Fi,5,NORMAL
+8,La La Land,Romance,0,NORMAL
+9,Gladiator,Acción,4,NORMAL
+10,El Rey León,Animación,5,NORMAL
+11,Parasite,Thriller,3,NORMAL
+12,Jurassic Park,Aventura,6,NORMAL
+13,Interstellar,Sci-Fi,0,NORMAL
+14,Forrest Gump,Drama,5,NORMAL
+15,Harry Potter y la Piedra Filosofal,Fantasía,7,NORMAL
+16,Spider-Man: No Way Home,Acción,6,ESTRENO
+17,Coco,Animación,4,NORMAL
+18,Avatar,Sci-Fi,0,NORMAL
+19,The Godfather,Drama,3,NORMAL
+20,Shrek,Animación,1,NORMAL
+21,Ratatouille,Animación,1,NORMAL
+22,The end of Evangelion,Animación,10,ESTRENO
+23,Una Película de Minecraft,Comedia,3,ESTRENO

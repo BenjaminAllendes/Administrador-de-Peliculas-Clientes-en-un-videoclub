@@ -66,12 +66,14 @@ public class Videoclub {
     private void saveMoviesToFile(String filename) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
             for (Movie m : movies.values()) {
-                pw.println(m.getID() + "," + m.getTitle() + "," + m.getGenre() + "," + m.getStock());
+                String tipo = (m instanceof NewReleaseMovie) ? "ESTRENO" : "NORMAL";
+                pw.println(m.getID() + "," + m.getTitle() + "," + m.getGenre() + "," + m.getStock() + "," + tipo);
             }
         } catch (IOException e) {
             System.out.println("Error al guardar películas: " + e.getMessage());
         }
     }
+
 
     private void saveRentsToFile(String filename) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
@@ -147,24 +149,27 @@ public class Videoclub {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
-                line = line.trim(); // Elimina espacios al inicio y fin
-                if (line.isEmpty()) continue; // Ignora líneas vacías
-
                 String[] parts = line.split(",");
-                if (parts.length < 4) continue; // Ignora líneas incompletas
-
                 int id = Integer.parseInt(parts[0]);
                 String title = parts[1];
                 String genre = parts[2];
                 int stock = Integer.parseInt(parts[3]);
+                String tipo = (parts.length > 4) ? parts[4] : "NORMAL"; // por compatibilidad
 
-                Movie m = new Movie(id, title, genre, stock);
-                movies.put(id, m);
+                Movie movie;
+                if ("ESTRENO".equalsIgnoreCase(tipo)) {
+                    movie = new NewReleaseMovie(id, title, genre, stock);
+                } else {
+                    movie = new Movie(id, title, genre, stock);
+                }
+
+                movies.put(id, movie);
             }
         } catch (IOException e) {
-            System.out.println("No se pudo cargar películas (posible primera ejecución)");
+            System.out.println("Error al cargar películas: " + e.getMessage());
         }
     }
+
 
 
     private void loadRentsFromFile(String filename) {
@@ -359,9 +364,11 @@ public class Videoclub {
 
     public String getMoviesInfo() {
         StringBuilder sb = new StringBuilder();
-        for (Movie m : movies.values()) { // Accedemos directamente al mapa
+        for (Movie m : movies.values()) { //Accedemos al mapa
+            String tipo = (m instanceof NewReleaseMovie) ? "[ESTRENO]" : "[NORMAL]";
             sb.append("ID: ").append(m.getID())
                     .append(" | Título: ").append(m.getTitle())
+                    .append(" | Tipo: ").append(tipo)
                     .append(" | Género: ").append(m.getGenre())
                     .append(" | Stock: ").append(m.getStock()).append("\n");
         }
