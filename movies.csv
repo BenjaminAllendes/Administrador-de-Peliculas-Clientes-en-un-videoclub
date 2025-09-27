@@ -1,5 +1,5 @@
-1,Matrix,Acción,4
-2,Titanic,Romance,0
+1,Matrix,Acción,1
+2,Titanic,Romance,2
 3,El Señor de los Anillos,Fantasía,3
 4,Toy Story,Animación,6
 5,Los Increíbles,Animación,2
@@ -10,12 +10,12 @@
 10,El Rey León,Animación,5
 11,Parasite,Thriller,3
 12,Jurassic Park,Aventura,6
-13,Interstellar,Sci-Fi,4
+13,Interstellar,Sci-Fi,0
 14,Forrest Gump,Drama,5
 15,Harry Potter y la Piedra Filosofal,Fantasía,7
 16,Spider-Man: No Way Home,Acción,6
 17,Coco,Animación,4
-18,Avatar,Sci-Fi,5
+18,Avatar,Sci-Fi,0
 19,The Godfather,Drama,3
-20,Shrek,Animación,6
+20,Shrek,Animación,2
 21,Ratatouille,Animación,1

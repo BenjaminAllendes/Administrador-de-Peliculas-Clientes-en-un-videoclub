@@ -8,6 +8,7 @@ public class Client {
     private ArrayList<Rent> rentList;       // Arriendos activos
     private ArrayList<Rent> pastList;       // Arriendos pasados
 
+
     // Constructor
     public Client(int id, String name) {
         this.id = id;
@@ -127,5 +128,9 @@ public class Client {
                     .append(" (Arrendado el: ").append(rent.getRentDate()).append(")\n");
         }
         return info.toString();
+    }
+
+    public boolean isVIP() {
+        return false;
     }
 }

@@ -56,7 +56,7 @@ public class Videoclub {
     private void saveClientsToFile(String filename) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
             for (Client c : clients.values()) {
-                pw.println(c.getId() + "," + c.getName());
+                pw.println(c.getId() + "," + c.getName() + "," + (c.isVIP() ? "1" : "0"));
             }
         } catch (IOException e) {
             System.out.println("Error al guardar clientes: " + e.getMessage());
@@ -110,13 +110,39 @@ public class Videoclub {
                 String[] parts = line.split(",");
                 int id = Integer.parseInt(parts[0]);
                 String name = parts[1];
-                clients.put(id, new Client(id, name));
+                boolean vip = parts.length > 2 && parts[2].equals("1");
+
+                Client c;
+                if (vip) {
+                    c = new ClientVIP(id, name);
+                } else {
+                    c = new Client(id, name);
+                }
+
+                clients.put(id, c);
             }
         } catch (IOException e) {
             System.out.println("No se pudo cargar clientes (posible primera ejecución)");
         }
     }
 
+
+
+    /*
+    private void loadClientsFromFile(String filename) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0]);
+                String name = parts[1];
+                clients.put(id, new Client(id, name));
+            }
+        } catch (IOException e) {
+            System.out.println("No se pudo cargar clientes (posible primera ejecución)");
+        }
+    }
+*/
     private void loadMoviesFromFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -317,12 +343,19 @@ public class Videoclub {
 
     public String getClientsInfo() {
         StringBuilder sb = new StringBuilder();
-        for (Client c : clients.values()) { // Accedemos directamente al mapa
+        for (Client c : clients.values()) {
             sb.append("ID: ").append(c.getId())
-                    .append(" | Nombre: ").append(c.getName()).append("\n");
+                    .append(" | Nombre: ").append(c.getName());
+
+            if (c.isVIP()) {
+                sb.append(" (VIP)");
+            }
+
+            sb.append("\n");
         }
         return sb.toString();
     }
+
 
     public String getMoviesInfo() {
         StringBuilder sb = new StringBuilder();

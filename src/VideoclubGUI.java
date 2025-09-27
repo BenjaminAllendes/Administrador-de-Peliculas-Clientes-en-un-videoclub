@@ -93,7 +93,7 @@ public class VideoclubGUI extends JFrame {
     // ======================================
     // MÉTODOS PARA CADA FUNCIONALIDAD
     // ======================================
-
+/*
     private void handleRegistration() {
         String name = JOptionPane.showInputDialog(this, "Ingrese su nombre:");
         if (name != null && !name.isEmpty()) {
@@ -101,6 +101,34 @@ public class VideoclubGUI extends JFrame {
             Client newClient = new Client(id, name);
             videoclub.addClient(newClient);
             displayArea.append("✅ Cliente '" + name + "' añadido con ID: " + id + "\n");
+        }
+    }
+*/
+    private void handleRegistration() {
+        String name = JOptionPane.showInputDialog(this, "Ingrese su nombre:");
+        if (name != null && !name.isEmpty()) {
+            int id = (int) (Math.random() * 9000) + 1000;
+
+            Object[] options = {"Cliente Normal", "Cliente VIP"};
+            int choice = JOptionPane.showOptionDialog(this,
+                    "Seleccione el tipo de cliente:",
+                    "Tipo de Cliente",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+
+            Client newClient;
+            if (choice == 1) { // VIP
+                newClient = new ClientVIP(id, name);
+            } else {
+                newClient = new Client(id, name);
+            }
+
+            videoclub.addClient(newClient);
+            displayArea.append("✅ Cliente '" + name + "' añadido con ID: " + id +
+                    (choice == 1 ? " (VIP)" : "") + "\n");
         }
     }
 

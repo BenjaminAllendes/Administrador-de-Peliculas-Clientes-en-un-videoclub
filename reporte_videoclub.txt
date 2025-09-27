@@ -6,15 +6,15 @@ ID: 4273 | Nombre: Ignacio
 ID: 8451 | Nombre: Dante López
 ID: 5540 | Nombre: Seba
 ID: 5221 | Nombre: Diego 
+ID: 5910 | Nombre: Branco (VIP)
 ID: 6471 | Nombre: Diego
-ID: 3529 | Nombre: Diego
 ID: 3515 | Nombre: Seba
 ID: 1275 | Nombre: Diego Aguayo
 
 
 Películas:
-ID: 1 | Título: Matrix | Género: Acción | Stock: 4
-ID: 2 | Título: Titanic | Género: Romance | Stock: 0
+ID: 1 | Título: Matrix | Género: Acción | Stock: 1
+ID: 2 | Título: Titanic | Género: Romance | Stock: 2
 ID: 3 | Título: El Señor de los Anillos | Género: Fantasía | Stock: 3
 ID: 4 | Título: Toy Story | Género: Animación | Stock: 6
 ID: 5 | Título: Los Increíbles | Género: Animación | Stock: 2
@@ -25,18 +25,22 @@ ID: 9 | Título: Gladiator | Género: Acción | Stock: 4
 ID: 10 | Título: El Rey León | Género: Animación | Stock: 5
 ID: 11 | Título: Parasite | Género: Thriller | Stock: 3
 ID: 12 | Título: Jurassic Park | Género: Aventura | Stock: 6
-ID: 13 | Título: Interstellar | Género: Sci-Fi | Stock: 4
+ID: 13 | Título: Interstellar | Género: Sci-Fi | Stock: 0
 ID: 14 | Título: Forrest Gump | Género: Drama | Stock: 5
 ID: 15 | Título: Harry Potter y la Piedra Filosofal | Género: Fantasía | Stock: 7
 ID: 16 | Título: Spider-Man: No Way Home | Género: Acción | Stock: 6
 ID: 17 | Título: Coco | Género: Animación | Stock: 4
-ID: 18 | Título: Avatar | Género: Sci-Fi | Stock: 5
+ID: 18 | Título: Avatar | Género: Sci-Fi | Stock: 0
 ID: 19 | Título: The Godfather | Género: Drama | Stock: 3
-ID: 20 | Título: Shrek | Género: Animación | Stock: 6
+ID: 20 | Título: Shrek | Género: Animación | Stock: 2
 ID: 21 | Título: Ratatouille | Género: Animación | Stock: 1
 
 
 Arriendos:
 Cliente: Seba | Película: Titanic | Fecha de devolución: 2025-10-05
 Cliente: Diego  | Película: La La Land | Fecha de devolución: 2025-10-11
+Cliente: Dante López | Película: Interstellar | Fecha de devolución: 2025-10-04
+Cliente: Dante López | Película: Avatar | Fecha de devolución: 2025-10-04
+Cliente: Dante López | Película: Matrix | Fecha de devolución: 2025-10-04
+Cliente: Branco | Película: Shrek | Fecha de devolución: 2025-10-04
 
