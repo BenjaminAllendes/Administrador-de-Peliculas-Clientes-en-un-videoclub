@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Client {
     private int id;
     private String name;
     private ArrayList<Rent> rentList;       // Arriendos activos
     private ArrayList<Rent> pastList;       // Arriendos pasados
-    private ArrayList<Movie> recommended;   // Películas recomendadas
 
     // Constructor
     public Client(int id, String name) {
@@ -13,7 +14,6 @@ public class Client {
         this.name = name;
         this.rentList = new ArrayList<>();
         this.pastList = new ArrayList<>();
-        this.recommended = new ArrayList<>();
     }
 
     // ----- ID -----
@@ -60,9 +60,24 @@ public class Client {
 
     // ----- RECOMMENDED -----
 
-    public void addRecommended(Movie movie){
-        recommended.add(movie);
+
+    public Set<Integer> getPastMovieIDs() {
+        Set<Integer> pastMovieIDs = new HashSet<>();
+        for (Rent rent : pastList) {
+            pastMovieIDs.add(rent.getMovie().getID());
+        }
+        return pastMovieIDs;
     }
+
+    public Set<String> getPastGenres() {
+        Set<String> genres = new HashSet<>();
+        for (Rent rent : pastList) {
+            genres.add(rent.getMovie().getGenre());
+        }
+        return genres;
+    }
+
+
     public void removeRent(Rent rent) {
         rentList.remove(rent);
     }

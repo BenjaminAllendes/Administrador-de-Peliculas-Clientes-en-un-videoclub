@@ -10,7 +10,6 @@ public class VideoclubGUI extends JFrame {
     public VideoclubGUI(Videoclub vc) {
         super("Videoclub - Gestión de Arriendos");
         this.videoclub = vc;
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
 
@@ -22,7 +21,6 @@ public class VideoclubGUI extends JFrame {
                 System.exit(0); // Luego de guardar, salir
             }
         });
-
 
 
 
@@ -43,6 +41,7 @@ public class VideoclubGUI extends JFrame {
         // Creación y adición de botones
         JButton registerButton = new JButton("1. Registrarse");
         JButton rentButton = new JButton("2. Realizar Arriendo");
+        JButton recommendButton = new JButton("3. Ver recomendaciones"); // NUEVO BOTÓN
         JButton returnButton = new JButton("4. Devolver Película");
         JButton showRentsButton = new JButton("5. Ver Arriendos Activos");
         JButton showClientsButton = new JButton("6. Ver Socios");
@@ -50,24 +49,26 @@ public class VideoclubGUI extends JFrame {
         JButton updateStockButton = new JButton("8. Actualizar Stock");
         JButton manageClientsButton = new JButton("9. Gestionar Clientes");
         JButton viewClientProfileButton = new JButton("10. Ver Perfil de Cliente");
-
+        JButton viewCleanScreen = new JButton("11. Limpiar Pantalla");
         JButton exitButton = new JButton("0. Salir");
 
         menuPanel.add(registerButton);
         menuPanel.add(rentButton);
+        menuPanel.add(recommendButton);
         menuPanel.add(returnButton);
         menuPanel.add(showRentsButton);
         menuPanel.add(showClientsButton);
         menuPanel.add(showMoviesButton);
         menuPanel.add(updateStockButton);
-        menuPanel.add(exitButton);
         menuPanel.add(manageClientsButton); // NUEVO
         menuPanel.add(viewClientProfileButton);
+        menuPanel.add(viewCleanScreen);
         menuPanel.add(exitButton);
 
         // --- MANEJO DE EVENTOS (Lambda Expressions) ---
         registerButton.addActionListener(e -> handleRegistration());
         rentButton.addActionListener(e -> handleRent());
+        recommendButton.addActionListener(e -> handleRecommendations()); // NUEVO LISTENER
         returnButton.addActionListener(e -> handleReturn());
         showRentsButton.addActionListener(e -> displayRents());
         showClientsButton.addActionListener(e -> displayClients());
@@ -75,6 +76,7 @@ public class VideoclubGUI extends JFrame {
         updateStockButton.addActionListener(e -> handleStockUpdate());
         manageClientsButton.addActionListener(e -> handleManageClient());
         viewClientProfileButton.addActionListener(e -> handleViewClientProfile());
+        viewCleanScreen.addActionListener(e -> viewCleanScreen());
         exitButton.addActionListener(e -> {
             // Guardar datos antes de salir
             videoclub.saveData();
@@ -105,6 +107,7 @@ public class VideoclubGUI extends JFrame {
 
     private void handleRent() {
         try {
+
             int clientID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:"));
             int movieID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el ID de la película:"));
             int days = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese días de arriendo:"));
@@ -124,6 +127,35 @@ public class VideoclubGUI extends JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error General", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void handleRecommendations() {
+        try {
+            displayArea.setText(""); // Limpia la pantalla antes de mostrar el resultado
+
+            String clientIDStr = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente:");
+            int clientID = Integer.parseInt(clientIDStr);
+
+            // Obtiene la instancia del cliente para acceder a su nombre
+            Client client = videoclub.findClientByID(clientID);
+
+            String recommendations = videoclub.getRecommendedMoviesInfo(clientID);
+
+            displayArea.append("===== RECOMENDACIONES PARA EL CLIENTE: ");
+            displayArea.append(client.getName());
+            displayArea.append(" (ID: ");
+            displayArea.append(String.valueOf(client.getId())); // Convierte el ID a String
+            displayArea.append(") =====\n");
+            displayArea.append(recommendations);
+            displayArea.append("==================================================\n");
+
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: Ingrese un ID numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (RecursoNoEncontradoException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -247,6 +279,10 @@ public class VideoclubGUI extends JFrame {
         } catch (RecursoNoEncontradoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void viewCleanScreen(){
+        displayArea.setText("");
     }
 
 }

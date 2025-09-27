@@ -15,7 +15,32 @@ public class Videoclub {
     }
 
 
+    public String getRecommendedMoviesInfo(int clientID) throws RecursoNoEncontradoException {
+        Client client = findClientByID(clientID);
+        Set<String> pastGenres = client.getPastGenres();
 
+        if (pastGenres.isEmpty()) {
+            return "No hay recomendaciones disponibles, ya que no tiene historial de arriendos.";
+        }
+
+        Set<Integer> pastMovieIDs = client.getPastMovieIDs();
+
+        StringBuilder recommendationsInfo = new StringBuilder();
+        boolean foundRecommendation = false;
+
+        for (Movie movie : movies.values()) {
+            if (pastGenres.contains(movie.getGenre()) && !pastMovieIDs.contains(movie.getID()) && movie.estaDisponible()) {
+                recommendationsInfo.append(" - ID: ").append(movie.getID()).append(" | ").append(movie.getTitle()).append(" (").append(movie.getGenre()).append(")\n");
+                foundRecommendation = true;
+            }
+        }
+
+        if (!foundRecommendation) {
+            return "No hay recomendaciones que coincidan con su historial.";
+        }
+
+        return recommendationsInfo.toString();
+    }
 
 
     //inasnjsajnasbjasbjasfbhafasaf
@@ -305,6 +330,8 @@ public class Videoclub {
         }
         throw new RecursoNoEncontradoException("Ningún cliente tiene arrendada la película con ID: " + movieID);
     }
+
+
 
 }
 

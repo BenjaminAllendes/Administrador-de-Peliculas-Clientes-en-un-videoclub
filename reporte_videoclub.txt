@@ -1,18 +1,26 @@
 ==== REPORTE VIDEOCLUB ====
 
 Clientes:
+ID: 2832 | Nombre: Andres
+ID: 4273 | Nombre: Ignacio
 ID: 8451 | Nombre: Dante López
+ID: 5540 | Nombre: Seba
+ID: 5221 | Nombre: Diego 
+ID: 6471 | Nombre: Diego
+ID: 3529 | Nombre: Diego
+ID: 3515 | Nombre: Seba
+ID: 1275 | Nombre: Diego Aguayo
 
 
 Películas:
 ID: 1 | Título: Matrix | Género: Acción | Stock: 4
-ID: 2 | Título: Titanic | Género: Romance | Stock: 3
-ID: 3 | Título: El Señor de los Anillos | Género: Fantasía | Stock: 4
+ID: 2 | Título: Titanic | Género: Romance | Stock: 0
+ID: 3 | Título: El Señor de los Anillos | Género: Fantasía | Stock: 3
 ID: 4 | Título: Toy Story | Género: Animación | Stock: 6
 ID: 5 | Título: Los Increíbles | Género: Animación | Stock: 2
 ID: 6 | Título: Avengers: Endgame | Género: Acción | Stock: 7
 ID: 7 | Título: Inception | Género: Sci-Fi | Stock: 5
-ID: 8 | Título: La La Land | Género: Romance | Stock: 3
+ID: 8 | Título: La La Land | Género: Romance | Stock: 0
 ID: 9 | Título: Gladiator | Género: Acción | Stock: 4
 ID: 10 | Título: El Rey León | Género: Animación | Stock: 5
 ID: 11 | Título: Parasite | Género: Thriller | Stock: 3
@@ -25,9 +33,11 @@ ID: 17 | Título: Coco | Género: Animación | Stock: 4
 ID: 18 | Título: Avatar | Género: Sci-Fi | Stock: 5
 ID: 19 | Título: The Godfather | Género: Drama | Stock: 3
 ID: 20 | Título: Shrek | Género: Animación | Stock: 6
-ID: 21 | Título: Ratatouille | Género: Animación | Stock: 2
+ID: 21 | Título: Ratatouille | Género: Animación | Stock: 0
 
 
 Arriendos:
 Cliente: Dante López | Película: Ratatouille | Fecha de devolución: 2025-10-09
+Cliente: Seba | Película: Titanic | Fecha de devolución: 2025-10-05
+Cliente: Diego  | Película: La La Land | Fecha de devolución: 2025-10-11
 

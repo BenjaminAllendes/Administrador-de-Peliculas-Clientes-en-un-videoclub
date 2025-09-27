@@ -1,11 +1,11 @@
 1,Matrix,Acción,4
-2,Titanic,Romance,3
-3,El Señor de los Anillos,Fantasía,4
+2,Titanic,Romance,0
+3,El Señor de los Anillos,Fantasía,3
 4,Toy Story,Animación,6
 5,Los Increíbles,Animación,2
 6,Avengers: Endgame,Acción,7
 7,Inception,Sci-Fi,5
-8,La La Land,Romance,3
+8,La La Land,Romance,0
 9,Gladiator,Acción,4
 10,El Rey León,Animación,5
 11,Parasite,Thriller,3
@@ -18,4 +18,4 @@
 18,Avatar,Sci-Fi,5
 19,The Godfather,Drama,3
 20,Shrek,Animación,6
-21,Ratatouille,Animación,2
+21,Ratatouille,Animación,0
