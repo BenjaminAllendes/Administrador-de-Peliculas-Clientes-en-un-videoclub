@@ -6,12 +6,14 @@ public class Videoclub {
     private Map<Integer, Client> clients;  // Clientes registrados
     private Map<Integer, Movie> movies;    // Películas disponibles
     private ArrayList<Rent> rents;         // Arriendos activos
+    private ArrayList<Rent> pastRents;
 
     // Constructor
     public Videoclub() {
         clients = new HashMap<>();
         movies = new HashMap<>();
         rents = new ArrayList<>();
+        pastRents = new ArrayList<>();
     }
 
 
@@ -48,6 +50,7 @@ public class Videoclub {
         saveClientsToFile("clients.csv");
         saveMoviesToFile("movies.csv");
         saveRentsToFile("rents.csv");
+        savePastRentsToFile("past_rents.csv");
     }
 
     private void saveClientsToFile(String filename) {
@@ -79,6 +82,16 @@ public class Videoclub {
             System.out.println("Error al guardar arriendos: " + e.getMessage());
         }
     }
+    private void savePastRentsToFile(String filename) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+            // Lógica simplificada: itera directamente sobre la lista global de arriendos pasados
+            for (Rent pastRent : this.pastRents) {
+                pw.println(pastRent.toCSV());
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar historial de arriendos: " + e.getMessage());
+        }
+    }
 
     //jkasjsakasbhkkaskbhabhkshbksa
 
@@ -87,6 +100,7 @@ public class Videoclub {
         loadClientsFromFile("clients.csv");
         loadMoviesFromFile("movies.csv");
         loadRentsFromFile("rents.csv");
+        loadPastRentsFromFile("past_rents.csv");
     }
 
     private void loadClientsFromFile(String filename) {
@@ -140,6 +154,39 @@ public class Videoclub {
             }
         } catch (IOException e) {
             System.out.println("No se pudo cargar arriendos (posible primera ejecución)");
+        }
+    }
+    private void loadPastRentsFromFile(String filename) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                try {
+                    String[] parts = line.split(",");
+                    int clientID = Integer.parseInt(parts[0]);
+                    int movieID = Integer.parseInt(parts[1]);
+                    LocalDate rentDate = LocalDate.parse(parts[2]);
+                    LocalDate returnDate = LocalDate.parse(parts[3]);
+
+                    Client c = findClientByID(clientID);
+                    Movie m = findMovieByID(movieID);
+
+                    // Creamos el arriendo y corregimos los efectos secundarios del constructor
+                    Rent pastRent = new Rent(c, m, rentDate, returnDate);
+                    m.increaseStock();      // Restauramos el stock
+                    c.removeRent(pastRent); // Lo quitamos de la lista activa del cliente
+
+                    // MODIFICADO: Poblamos tanto la lista del cliente como la lista global de Videoclub
+                    c.addPastRent(pastRent);
+                    this.pastRents.add(pastRent); // Se añade a la lista centralizada
+
+                } catch (RecursoNoEncontradoException e) {
+                    System.out.println("No se pudo cargar arriendo histórico: " + e.getMessage());
+                } catch (Exception e) {
+                    System.out.println("Error procesando línea en historial de arriendos: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("No se pudo cargar historial de arriendos (posible primera ejecución)");
         }
     }
 
@@ -218,18 +265,18 @@ public class Videoclub {
         Client c = findClientByID(clientID);
         Movie m = findMovieByID(movieID);
 
-        if (c != null && m != null) {
+        Rent rentToReturn = c.findActiveRentByMovieID(movieID) ;
 
-            // Buscar el arriendo activo correspondiente
-            Rent rentToReturn = c.findActiveRentByMovieID(movieID) ;
+        if (rentToReturn != null) {
+            // Mover el arriendo de las listas activas a las pasadas
+            c.removeRent(rentToReturn);            // Quitar de lista activa del cliente
+            rents.remove(rentToReturn);            // Quitar de lista activa del videoclub
 
-            if (rentToReturn != null) {
-                c.removeRent(rentToReturn);// Quitar del listado activo del cliente
-                c.addPastRent(rentToReturn);           // Agregar al historial
-                rents.remove(rentToReturn);            // Quitar de lista global de arriendos activos
-                m.increaseStock();                     // Devolver stock de la película
-                return true;
-            }
+            c.addPastRent(rentToReturn);           // Agregar al historial del cliente
+            this.pastRents.add(rentToReturn);      // <-- MODIFICADO: Agregar al historial global del videoclub
+
+            m.increaseStock();                     // Devolver stock de la película
+            return true;
         }
         return false;
     }

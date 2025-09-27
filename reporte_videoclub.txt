@@ -33,11 +33,10 @@ ID: 17 | Título: Coco | Género: Animación | Stock: 4
 ID: 18 | Título: Avatar | Género: Sci-Fi | Stock: 5
 ID: 19 | Título: The Godfather | Género: Drama | Stock: 3
 ID: 20 | Título: Shrek | Género: Animación | Stock: 6
-ID: 21 | Título: Ratatouille | Género: Animación | Stock: 0
+ID: 21 | Título: Ratatouille | Género: Animación | Stock: 1
 
 
 Arriendos:
-Cliente: Dante López | Película: Ratatouille | Fecha de devolución: 2025-10-09
 Cliente: Seba | Película: Titanic | Fecha de devolución: 2025-10-05
 Cliente: Diego  | Película: La La Land | Fecha de devolución: 2025-10-11
 
