@@ -1,0 +1,160 @@
+@startuml
+' Diagrama de clases basado en el código del videoclub
+
+' Clases principales
+class Main {
+  + main(String[]): void
+}
+
+class VideoclubGUI {
+  - videoclub: Videoclub
+  - displayArea: JTextArea
+  + VideoclubGUI(Videoclub)
+  --
+  - handleRegistration(): void
+  - handleRent(): void
+  - handleRecommendations(): void
+  - handleReturn(): void
+  - displayRents(): void
+  - displayClients(): void
+  - displayMovies(): void
+  - handleStockUpdate(): void
+  - handleManageClient(): void
+  - handleViewClientProfile(): void
+  - handleAddMovie(): void
+  - viewCleanScreen(): void
+}
+
+class Videoclub {
+  - clients: Map<Integer, Client>
+  - movies: Map<Integer, Movie>
+  - rents: ArrayList<Rent>
+  - pastRents: ArrayList<Rent>
+  --
+  + Videoclub()
+  + getRecommendedMoviesInfo(int): String
+  + saveData(): void
+  - saveClientsToFile(String): void
+  - saveMoviesToFile(String): void
+  - saveRentsToFile(String): void
+  - savePastRentsToFile(String): void
+  + loadData(): void
+  - loadClientsFromFile(String): void
+  - loadMoviesFromFile(String): void
+  - loadRentsFromFile(String): void
+  - loadPastRentsFromFile(String): void
+  + generarReporteTXT(String): void
+  + addClient(Client): void
+  + findClientByID(int): Client
+  + addMovie(Movie): void
+  + findMovieByID(int): Movie
+  + rentMovie(int, int, int): boolean
+  + returnMovie(int, int): boolean
+  + getRentsInfo(): String
+  + getClientsInfo(): String
+  + getMoviesInfo(): String
+  + removeClient(int): void
+  + modifyClientName(int, String): void
+  + removeMovie(int): void
+  + modifyMovieTitle(int, String): void
+  + findMovieByTitle(String): Movie
+  + findClientByRentedMovieID(int): Client
+}
+
+class Client {
+  - id: int
+  - name: String
+  - rentList: ArrayList<Rent>
+  - pastList: ArrayList<Rent>
+  --
+  + Client(int, String)
+  + setId(int): void
+  + getId(): int
+  + setName(String): void
+  + setName(String, String): void
+  + getName(): String
+  + addRent(Rent): void
+  + addPastRent(Rent): void
+  + getPastMovieIDs(): Set<Integer>
+  + getPastGenres(): Set<String>
+  + removeRent(Rent): void
+  + findActiveRentByMovieID(int): Rent
+  + getActiveRentsInfo(): String
+  + getPastRentsInfo(): String
+  + isVIP(): boolean
+}
+
+class ClientVIP {
+  + ClientVIP(int, String)
+  --
+  + getActiveRentsInfo(): String
+  + getPastRentsInfo(): String
+  + isVIP(): boolean
+}
+
+class Movie {
+  - id: int
+  - title: String
+  - genre: String
+  - stock: int
+  --
+  + Movie(int, String, String, int)
+  + getTitle(): String
+  + getGenre(): String
+  + getID(): int
+  + getStock(): int
+  + estaDisponible(): boolean
+  + decreaseStock(): void
+  + increaseStock(int): void
+  + toString(): String
+}
+
+class NewReleaseMovie {
+  + NewReleaseMovie(int, String, String, int)
+  --
+  + toString(): String
+}
+
+class Rent {
+  - rentClient: Client
+  - movie: Movie
+  - rentDate: LocalDate
+  - returnDate: LocalDate
+  --
+  + Rent(Client, Movie, LocalDate, LocalDate)
+  + fromCSV(String, Videoclub): Rent
+  + toCSV(): String
+  + getRentClient(): Client
+  + getMovie(): Movie
+  + getRentDate(): LocalDate
+  + getReturnDate(): LocalDate
+  + showInfo(): void
+}
+
+class PeliculaSinStockException {
+  + PeliculaSinStockException(String)
+}
+
+class RecursoNoEncontradoException {
+  + RecursoNoEncontradoException(String)
+}
+
+' Relaciones
+Main ..> VideoclubGUI
+VideoclubGUI "1" --> "1" Videoclub : <<asocia>>
+Videoclub "1" o-- "*" Client
+Videoclub "1" o-- "*" Movie
+Videoclub "1" o-- "*" Rent
+Client "1" *-- "*" Rent : <<agrega>>
+Movie "1" o-- "*" Rent : <<es arrendada por>>
+
+' Herencia
+Client <|-- ClientVIP
+Movie <|-- NewReleaseMovie
+
+' Dependencias (excepciones)
+Videoclub ..> PeliculaSinStockException
+Videoclub ..> RecursoNoEncontradoException
+Rent ..> RecursoNoEncontradoException
+
+@enduml
