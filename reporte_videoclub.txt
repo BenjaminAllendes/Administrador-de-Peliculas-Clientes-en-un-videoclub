@@ -1,19 +1,19 @@
 ==== REPORTE VIDEOCLUB ====
 
 Clientes:
-ID: 2832 | Nombre: Andres
+ID: 2832 | Nombre: Andres (VIP)
 ID: 4273 | Nombre: Ignacio
 ID: 8451 | Nombre: Dante López
 ID: 5540 | Nombre: Seba
 ID: 5221 | Nombre: Diego 
 ID: 5910 | Nombre: Branco (VIP)
 ID: 6471 | Nombre: Diego
-ID: 3515 | Nombre: Seba
-ID: 1275 | Nombre: Diego Aguayo
+ID: 3515 | Nombre: Seba (VIP)
+ID: 1275 | Nombre: Diego Aguayo (VIP)
 
 
 Películas:
-ID: 1 | Título: Matrix | Tipo: [NORMAL] | Género: Acción | Stock: 1
+ID: 1 | Título: Los Pak-Man | Tipo: [NORMAL] | Género: Romance | Stock: 5
 ID: 2 | Título: Titanic | Tipo: [NORMAL] | Género: Romance | Stock: 1
 ID: 3 | Título: El Señor de los Anillos | Tipo: [NORMAL] | Género: Fantasía | Stock: 3
 ID: 4 | Título: Toy Story | Tipo: [NORMAL] | Género: Animación | Stock: 6
