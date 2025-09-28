@@ -1,15 +1,15 @@
 ==== REPORTE VIDEOCLUB ====
 
 Clientes:
-ID: 2832 | Nombre: Andres
+ID: 2832 | Nombre: Andres (VIP)
 ID: 4273 | Nombre: Ignacio
 ID: 8451 | Nombre: Dante López
 ID: 5540 | Nombre: Seba
 ID: 5221 | Nombre: Diego 
 ID: 5910 | Nombre: Branco (VIP)
 ID: 6471 | Nombre: Diego
-ID: 3515 | Nombre: Seba
-ID: 1275 | Nombre: Diego Aguayo
+ID: 3515 | Nombre: Seba (VIP)
+ID: 1275 | Nombre: Diego Aguayo (VIP)
 
 
 Películas:

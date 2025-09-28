@@ -16,7 +16,7 @@ public class Videoclub {
         pastRents = new ArrayList<>();
     }
 
-
+//Metodo para Recomenda peliculas a clientes en base a generos mas arrendados del ciente
     public String getRecommendedMoviesInfo(int clientID) throws RecursoNoEncontradoException {
         Client client = findClientByID(clientID);
         Set<String> pastGenres = client.getPastGenres();
@@ -45,14 +45,14 @@ public class Videoclub {
     }
 
 
-    //inasnjsajnasbjasbjasfbhafasaf
+//SaveData general por si hay que cambiar los nombres de los archivos
     public void saveData() {
         saveClientsToFile("clients.csv");
         saveMoviesToFile("movies.csv");
         saveRentsToFile("rents.csv");
         savePastRentsToFile("past_rents.csv");
     }
-
+//--------------   Saves -------------
     private void saveClientsToFile(String filename) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
             for (Client c : clients.values()) {
@@ -95,16 +95,14 @@ public class Videoclub {
         }
     }
 
-    //jkasjsakasbhkkaskbhabhkshbksa
-
-    //nkasbkasdbkasdjkaskjsad
+//LoadData de manera general en caso de agregar mas datos y distintos nombres de archivos
     public void loadData() {
         loadClientsFromFile("clients.csv");
         loadMoviesFromFile("movies.csv");
         loadRentsFromFile("rents.csv");
         loadPastRentsFromFile("past_rents.csv");
     }
-
+//---------------   Loads   ------------------
     private void loadClientsFromFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -130,21 +128,7 @@ public class Videoclub {
 
 
 
-    /*
-    private void loadClientsFromFile(String filename) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-                int id = Integer.parseInt(parts[0]);
-                String name = parts[1];
-                clients.put(id, new Client(id, name));
-            }
-        } catch (IOException e) {
-            System.out.println("No se pudo cargar clientes (posible primera ejecución)");
-        }
-    }
-*/
+
     private void loadMoviesFromFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -222,8 +206,8 @@ public class Videoclub {
     }
 
 
-    //anjasjsakka sk as
 
+//Genera el reporte
     public void generarReporteTXT(String filename) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
             pw.println("==== REPORTE VIDEOCLUB ====");
@@ -407,7 +391,7 @@ public class Videoclub {
     }
 
     public Client findClientByRentedMovieID(int movieID) throws RecursoNoEncontradoException {
-        // Primero, valida que la película exista
+        // Primero, valída que la película exista
         findMovieByID(movieID);
 
         for (Client client : clients.values()) {

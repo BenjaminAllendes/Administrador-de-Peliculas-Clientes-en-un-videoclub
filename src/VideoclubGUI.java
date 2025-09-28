@@ -96,17 +96,7 @@ public class VideoclubGUI extends JFrame {
     // ======================================
     // MÉTODOS PARA CADA FUNCIONALIDAD
     // ======================================
-/*
-    private void handleRegistration() {
-        String name = JOptionPane.showInputDialog(this, "Ingrese su nombre:");
-        if (name != null && !name.isEmpty()) {
-            int id = (int) (Math.random() * 9000) + 1000;
-            Client newClient = new Client(id, name);
-            videoclub.addClient(newClient);
-            displayArea.append("✅ Cliente '" + name + "' añadido con ID: " + id + "\n");
-        }
-    }
-*/
+
     private void handleRegistration() {
         String name = JOptionPane.showInputDialog(this, "Ingrese su nombre:");
         if (name != null && !name.isEmpty()) {

@@ -19,6 +19,7 @@ public class Rent {
         // Disminuye el stock de la película
         movie.decreaseStock();
     }
+    //Se utiliza para leer los datos de manera correcta desde el CSV para despues pasarlo a datos utilizables en el programa
     public static Rent fromCSV(String line, Videoclub vc) throws RecursoNoEncontradoException {
         String[] parts = line.split(",");
         int clientID = Integer.parseInt(parts[0]);

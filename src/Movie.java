@@ -5,7 +5,7 @@ public class Movie {
     private String genre;
     private int stock;
 
-
+    //Constructor
     public Movie(int id, String title, String genre, int stock){
 
         this.id = id;
@@ -51,17 +51,18 @@ public class Movie {
     public void decreaseStock(){
         if (stock >0) stock--;
     }
-
+    //Sobrecarga de metodos
     public void increaseStock(){
         stock++;
     }
+    //Sobrecarga de metodos
     public void increaseStock(int cantidad) {
         if (cantidad > 0) {
             this.stock += cantidad;
         }
     }
     @Override
-    public String toString() {
+    public String toString() { //Usada para sobreescribir
         return id + " - " + title + " | Género: " + genre + " | Stock: " + stock;
     }
 

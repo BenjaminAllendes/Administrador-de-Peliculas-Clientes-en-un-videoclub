@@ -24,11 +24,12 @@ public class Client {
         }
     }
 
+    // ----- NAME -----
     public int getId(){
         return id;
     }
 
-    // ----- NAME -----
+
     public void setName(String name){
         if (name != null && !name.isEmpty()) {
             this.name = name;
@@ -46,20 +47,20 @@ public class Client {
         return name;
     }
 
-    // ----- RENT LIST -----
+    // ----- Lista de Arriendos Activos -----
 
     public void addRent(Rent rent){
         rentList.add(rent);
     }
 
-    // ----- PAST LIST -----
+    // ----- Lista de Arriendos pasados -----
 
 
     public void addPastRent(Rent rent){
         pastList.add(rent);
     }
 
-    // ----- RECOMMENDED -----
+    // ----- Recomendaciones -----
 
 
     public Set<Integer> getPastMovieIDs() {
@@ -78,7 +79,7 @@ public class Client {
         return genres;
     }
 
-
+    //Arriendos
     public void removeRent(Rent rent) {
         rentList.remove(rent);
     }
@@ -103,7 +104,7 @@ public class Client {
         }
         System.out.println("---------------------------------");
     }
-
+    //Obtener Arriendos activos
     public String getActiveRentsInfo() {
         if (rentList.isEmpty()) {
             return "No tiene arriendos activos.\n";
@@ -116,7 +117,7 @@ public class Client {
         }
         return info.toString();
     }
-
+    //Obtener Arriendos Pasados
     public String getPastRentsInfo() {
         if (pastList.isEmpty()) {
             return "No tiene historial de arriendos.\n";
@@ -132,5 +133,5 @@ public class Client {
 
     public boolean isVIP() {
         return false;
-    }
+    } //Se utiliza para despues sobreescribirlo
 }
